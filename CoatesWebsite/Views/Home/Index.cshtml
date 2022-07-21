@@ -4,6 +4,23 @@
 }
 <!DOCTYPE html>
 
+<head>
+    <style>
+        .galleryImageWrapper {
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            height: 250px;
+        }
+
+        .galleryImage {
+            max-width: 100%;
+            height: auto;
+        }
+
+    </style>
+</head>
+
 <html lang="en">
 <body>
     <a id="top"></a>
@@ -96,19 +113,11 @@
                             <div class="gallery" style="align-items:center">
                                 @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms)
                                 {
-                    <figure>
-                        <img src=@pictureVm.Path alt="" />
-                    </figure>}
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
-                                <symbol id="close" viewBox="0 0 18 18">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M9,0.493C4.302,0.493,0.493,4.302,0.493,9S4.302,17.507,9,17.507
-			S17.507,13.698,17.507,9S13.698,0.493,9,0.493z M12.491,11.491c0.292,0.296,0.292,0.773,0,1.068c-0.293,0.295-0.767,0.295-1.059,0
-			l-2.435-2.457L6.564,12.56c-0.292,0.295-0.766,0.295-1.058,0c-0.292-0.295-0.292-0.772,0-1.068L7.94,9.035L5.435,6.507
-			c-0.292-0.295-0.292-0.773,0-1.068c0.293-0.295,0.766-0.295,1.059,0l2.504,2.528l2.505-2.528c0.292-0.295,0.767-0.295,1.059,0
-			s0.292,0.773,0,1.068l-2.505,2.528L12.491,11.491z" />
-                                </symbol>
-                            </svg>
+                                    <figure class="galleryImageWrapper">
+                                        <img src=@pictureVm.Path alt="" class="galleryImage" />
+                                    </figure>
+                                }
+                            </div>                           
                         </div>
                     </div>
                 </div>
@@ -117,22 +126,13 @@
                         <div class="row">
                             <div class="gallery">
                                 @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                   .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry))
+                                .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry))
                                 {
-                    <figure>
-                        <img src=@pictureVm.Path alt="" />
-                    </figure>}
-
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
-                                <symbol id="close" viewBox="0 0 18 18">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M9,0.493C4.302,0.493,0.493,4.302,0.493,9S4.302,17.507,9,17.507
-			S17.507,13.698,17.507,9S13.698,0.493,9,0.493z M12.491,11.491c0.292,0.296,0.292,0.773,0,1.068c-0.293,0.295-0.767,0.295-1.059,0
-			l-2.435-2.457L6.564,12.56c-0.292,0.295-0.766,0.295-1.058,0c-0.292-0.295-0.292-0.772,0-1.068L7.94,9.035L5.435,6.507
-			c-0.292-0.295-0.292-0.773,0-1.068c0.293-0.295,0.766-0.295,1.059,0l2.504,2.528l2.505-2.528c0.292-0.295,0.767-0.295,1.059,0
-			s0.292,0.773,0,1.068l-2.505,2.528L12.491,11.491z" />
-                                </symbol>
-                            </svg>
+                                    <figure class="galleryImageWrapper">
+                                        <img src=@pictureVm.Path alt="" class="galleryImage" />
+                                    </figure>
+                                }
+                            </div>                         
                         </div>
                     </div>
                 </div>
@@ -144,19 +144,11 @@
                                     @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
                                       .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.Furniture))
                                     {
-                        <figure>
-                            <img src=@pictureVm.Path alt="" />
-                        </figure>}
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
-                                    <symbol id="close" viewBox="0 0 18 18">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M9,0.493C4.302,0.493,0.493,4.302,0.493,9S4.302,17.507,9,17.507
-			S17.507,13.698,17.507,9S13.698,0.493,9,0.493z M12.491,11.491c0.292,0.296,0.292,0.773,0,1.068c-0.293,0.295-0.767,0.295-1.059,0
-			l-2.435-2.457L6.564,12.56c-0.292,0.295-0.766,0.295-1.058,0c-0.292-0.295-0.292-0.772,0-1.068L7.94,9.035L5.435,6.507
-			c-0.292-0.295-0.292-0.773,0-1.068c0.293-0.295,0.766-0.295,1.059,0l2.504,2.528l2.505-2.528c0.292-0.295,0.767-0.295,1.059,0
-			s0.292,0.773,0,1.068l-2.505,2.528L12.491,11.491z" />
-                                    </symbol>
-                                </svg>
+                                        <figure class="galleryImageWrapper">
+                                            <img src=@pictureVm.Path alt="" class="galleryImage" />
+                                        </figure>
+                                    }
+                                </div>                               
                             </div>
                         </div>
                     </div>
@@ -172,16 +164,7 @@
                                     <figure>
                                         <img src="https://images.unsplash.com/photo-1448814100339-234df1d4005d?crop=entropy&fit=crop&fm=jpg&h=400&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=600" alt="" />
                                     </figure>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
-                                    <symbol id="close" viewBox="0 0 18 18">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M9,0.493C4.302,0.493,0.493,4.302,0.493,9S4.302,17.507,9,17.507
-			S17.507,13.698,17.507,9S13.698,0.493,9,0.493z M12.491,11.491c0.292,0.296,0.292,0.773,0,1.068c-0.293,0.295-0.767,0.295-1.059,0
-			l-2.435-2.457L6.564,12.56c-0.292,0.295-0.766,0.295-1.058,0c-0.292-0.295-0.292-0.772,0-1.068L7.94,9.035L5.435,6.507
-			c-0.292-0.295-0.292-0.773,0-1.068c0.293-0.295,0.766-0.295,1.059,0l2.504,2.528l2.505-2.528c0.292-0.295,0.767-0.295,1.059,0
-			s0.292,0.773,0,1.068l-2.505,2.528L12.491,11.491z" />
-                                    </symbol>
-                                </svg>
+                                </div>                               
                             </div>
                         </div>
                     </div>
@@ -217,6 +200,7 @@
                 </div>
             </div>
             <div id="my-tab-content" class="tab-content text-center">
+                @*Summer House*@
                 <div class="tab-pane active" id="summerhouse" role="tabpanel">
                     <p> Information about the Summerhouse project</p>
                     <div class="section pt-o" id="carousel-two">
@@ -226,49 +210,37 @@
                                     <div class="card page-carousel">
                                         <div id="carouselExampleIndicatorsTwo" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                                <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="0" class="active"></li>
-                                                <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="1" class=""></li>
-                                                <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="2" class=""></li>
+                                                @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                }
                                             </ol>
-
-
-
-                                            @*
-                                                
-                                                Ben do this please and thank you.
-                                                
-                                                @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                              .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry && x.Id > x.Id.))
-                                            { }*@
-
-
-                                        <div class="carousel-inner" role="listbox">
-                                            <div class="carousel-item active">
-                                                <img class="d-block img-fluid" src="https://images.unsplash.com/photo-1443890923422-7819ed4101c0?crop=entropy&fit=crop&fm=jpg&h=400&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=600" alt="First slide" />
-                                            </div>
-
-                                            <div class="carousel-item">
-                                                <img class="d-block img-fluid" src="https://images.unsplash.com/photo-1443890923422-7819ed4101c0?crop=entropy&fit=crop&fm=jpg&h=400&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=600" alt="Second slide" />
-                                            </div>
-
-                                            <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsTwo" role="button" data-slide="prev">
-                                                <span class="fa fa-angle-left">
-                                                </span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsTwo" role="button" data-slide="next">
-                                                <span class="fa fa-angle-right">
-                                                </span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
+                                            <div class="carousel-inner" role="listbox">
+                                                @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
+                                                {
+                                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                                        <img class="d-block img-fluid" src="@Model.SummerhousePictureVms[i].Path" alt="First slide" />
                                                     </div>
+                                                }
+                                                <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsTwo" role="button" data-slide="prev">
+                                                    <span class="fa fa-angle-left">
+                                                    </span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsTwo" role="button" data-slide="next">
+                                                    <span class="fa fa-angle-right">
+                                                    </span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @*Tregonwell Road*@
                 <div class="tab-pane" id="tregonwellroad" role="tabpanel">
                     <p>"TREGONWELL ROAD PROJECT"</p>
                     <div class="section pt-o" id="carousel-three">
@@ -278,20 +250,18 @@
                                     <div class="card page-carousel">
                                         <div id="carouselExampleIndicatorsThree" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                                <li data-target="#carouselExampleIndicatorsThree" data-slide-to="0" class="active"></li>
-                                                <li data-target="#carouselExampleIndicatorsThree" data-slide-to="1" class=""></li>
-                                                <li data-target="#carouselExampleIndicatorsThree" data-slide-to="2" class=""></li>
+                                                @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsThree" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                }
                                             </ol>
                                             <div class="carousel-inner" role="listbox">
-                                                <div class="carousel-item active">
-                                                    <img class="d-block img-fluid" src="./assets/img/flooring.jpg" alt="First slide" />
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="d-block img-fluid" src="./assets/img/summer-house-original.jpg" alt="Second slide" />
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="d-block img-fluid" src="./assets/img/joshua-stannard.jpg" alt="Third slide" />
-                                                </div>
+                                                @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
+                                                {
+                                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                                        <img class="d-block img-fluid" src="@Model.TregonwellRoadPictureVms[i].Path" alt="First slide" />
+                                                    </div>
+                                                }
                                             </div>
                                             <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsThree" role="button" data-slide="prev">
                                                 <span class="fa fa-angle-left">
@@ -310,8 +280,45 @@
                         </div>
                     </div>
                 </div>
+                @*Ponsford road*@
                 <div class="tab-pane" id="ponsfordroad" role="tabpanel">
                     <p>"PONSFORD ROAD PROJECT"</p>
+                    <div class="section pt-o" id="carousel-four">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 ml-auto mr-auto">
+                                    <div class="card page-carousel">
+                                        <div id="carouselExampleIndicatorsFour" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsFour" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                }
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
+                                                {
+                                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                                        <img class="d-block img-fluid" src="@Model.PonsfordRoadPictureVms[i].Path" alt="First slide" />
+                                                    </div>
+                                                }
+                                            </div>
+                                            <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsFour" role="button" data-slide="prev">
+                                                <span class="fa fa-angle-left">
+                                                </span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsFour" role="button" data-slide="next">
+                                                <span class="fa fa-angle-right">
+                                                </span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
