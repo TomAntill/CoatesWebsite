@@ -69,7 +69,7 @@ namespace CoatesWebsite.Controllers
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
             //Add file to root
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/img/uploads");
+            string path = "/assets/img/uploads";
 
             string fileName = request.Photo.FileName;
             long fileSize = request.Photo.Length;
