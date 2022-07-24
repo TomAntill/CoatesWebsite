@@ -43,8 +43,7 @@ namespace CoatesWebsite.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
 
             Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
 
@@ -61,16 +60,14 @@ namespace CoatesWebsite.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> Add(PictureVm request)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
             //Add file to root
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/img/uploads");
 
@@ -107,8 +104,7 @@ namespace CoatesWebsite.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
             Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
 
             PictureUpdateVm pictureUpdateVm = new PictureUpdateVm()
@@ -124,8 +120,7 @@ namespace CoatesWebsite.Controllers
         [HttpPost]
         public IActionResult Edit(PictureUpdateVm pictureUpdateVm)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
 
             Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == pictureUpdateVm.Id);
           
@@ -140,8 +135,7 @@ namespace CoatesWebsite.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
 
             Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
             PictureUpdateVm pictureUpdateVm = new PictureUpdateVm()
@@ -156,8 +150,7 @@ namespace CoatesWebsite.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult Delete(PictureUpdateVm pictureUpdateVm)
         {
-            var pretendRoleId = "admin";
-            IsUserAuthorised(pretendRoleId);
+            IsUserAuthorised(ADMIN_ROLE_CODE);
             //get picture details
             Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == pictureUpdateVm.Id);
             if (picture == null) return View("NotFound");

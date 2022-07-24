@@ -43,7 +43,6 @@ namespace CoatesWebsite.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(ApplicationUserVm request)
         {
-
             var user = new IdentityUser
             {
                 UserName = request.Email,
@@ -52,6 +51,12 @@ namespace CoatesWebsite.Controllers
                 NormalizedEmail = request.Email,
                 EmailConfirmed = true,
             };
+
+            if (request.Password != request.ConfirmPassword)
+            {
+                TempData["Failure"] = "Passwords do not match";
+                return RedirectToAction("index", "user");
+            }
 
             Regex r = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^'&*-]).{8,}$");
 
@@ -69,9 +74,8 @@ namespace CoatesWebsite.Controllers
                 return RedirectToAction("Login");
             }
             //else password incorrect
-
-
-            return RedirectToAction("Login");
+            TempData["Failure"] = "Please choose a password with a capital letter, number and symbol";
+            return RedirectToAction("index", "user");
 
         }
         // GET: /Account/Login
@@ -123,5 +127,11 @@ namespace CoatesWebsite.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            TempData["Success"] = "Logout successful.";
+            return RedirectToAction("login", "user");
+        }
     }
 }
