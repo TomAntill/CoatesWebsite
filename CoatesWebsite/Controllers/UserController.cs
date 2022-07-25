@@ -70,6 +70,7 @@ namespace CoatesWebsite.Controllers
                 var userCreated = await _userManager.FindByIdAsync(Id);
                 var token = await _userManager.GeneratePasswordResetTokenAsync(userCreated);
                 var result = await _userManager.ResetPasswordAsync(userCreated, token, request.Password);
+                await _userManager.AddClaimAsync(user, new Claim("UserRole", "Admin"));
 
                 return RedirectToAction("Login");
             }
@@ -106,7 +107,6 @@ namespace CoatesWebsite.Controllers
                 if (result.Succeeded)
                 {
                     TempData["Success"] = "Login Successful";
-                    await _userManager.AddClaimAsync(user, new Claim("UserRole", "Admin"));
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     bool val1 = User.Identity.IsAuthenticated;
                     return RedirectToAction("Index", "Pictures");

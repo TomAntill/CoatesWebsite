@@ -69,7 +69,8 @@ namespace CoatesWebsite.Controllers
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
             //Add file to root
-            string path = "/assets/img/uploads";
+            string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
+        //C: \Users\Thoma\source\repos\CoatesWebsite - Copy\CoatesWebsite\wwwroot\assets\img\uploads
 
             string fileName = request.Photo.FileName;
             long fileSize = request.Photo.Length;
@@ -87,12 +88,14 @@ namespace CoatesWebsite.Controllers
             }
 
             //add details to database
+            string pathDb = "/assets/img/uploads";
+            string fileNameWithPathDb = Path.Combine(pathDb, fileName);
             var picture = new Pictures
             {
                 Name = request.Name,
                 PictureCategory = request.PictureCategory,
                 ProjectName = request.ProjectName,
-                Path = fileNameWithPath
+                Path = fileNameWithPathDb
             };
 
             _context.Pictures.Add(picture);
