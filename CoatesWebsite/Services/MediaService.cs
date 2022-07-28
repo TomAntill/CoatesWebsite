@@ -1,4 +1,5 @@
-﻿using CoatesWebsite.DataModels;
+﻿using CoatesWebsite.DAL;
+using CoatesWebsite.DataModels;
 using CoatesWebsite.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,6 @@ namespace CoatesWebsite.Data.Services
             string fileNameWithPath = Path.Combine(path, fileName);
 
             Guards.Guards.FileSizeToLarge(fileSize);
-            Guards.Guards.FileNameIsUnique(fileNameWithPath);
             Guards.Guards.InvalidFileExtension(fileExt);
 
             using (var stream = new FileStream(fileNameWithPath, FileMode.Create))

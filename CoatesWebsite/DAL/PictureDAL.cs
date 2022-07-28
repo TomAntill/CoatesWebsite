@@ -27,7 +27,6 @@ namespace CoatesWebsite.DAL
         {
             var files = GetAll().Result;
             
-            
             //add details to database
             string fileName = request.Photo.FileName;
             Guards.Guards.FileNameIsUnique(files, fileName);
