@@ -21,12 +21,16 @@ namespace CoatesWebsite.DAL
             _context = coatesContext ?? throw new ArgumentNullException(nameof(coatesContext));
         }
 
+        private const string pathDb = "/assets/img/uploads";
 
         public async Task<int> Add(PictureVm request)
         {
+            var files = GetAll().Result;
+            
+            
             //add details to database
             string fileName = request.Photo.FileName;
-            string pathDb = "/assets/img/uploads";
+            Guards.Guards.FileNameIsUnique(files, fileName);
             string fileNameWithPathDb = Path.Combine(pathDb, fileName);
             var picture = new Pictures
             {

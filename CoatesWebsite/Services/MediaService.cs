@@ -15,8 +15,8 @@ namespace CoatesWebsite.Data.Services
         {
             _context = context;
         }
-        string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
-        string pathDb = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot";
+        private const string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
+        private const string pathDb = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot";
 
 
         public async Task<FileStream> Add(PictureVm request)

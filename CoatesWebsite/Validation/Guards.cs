@@ -10,18 +10,14 @@ namespace CoatesWebsite.Guards
 {
     public class Guards
     {
-        public static void FileNameIsUnique(string fileName)
+        public static void FileNameIsUnique(List<Pictures> files, string fileName)
         {
-            //inject database
-            CoatesContext _context = new CoatesContext();
-            
-            //Check database for fileName
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Path == fileName);
-
-            //If exists throw exception
-            if (picture != null)
+            foreach (Pictures file in files)
             {
-                throw new FileNameAlreadyExistsException("File name already exists");
+                if(fileName == file.Name)
+                {
+                    throw new FileNameAlreadyExistsException("File name already exists");
+                }
             }
         }
         public static void FileSizeToLarge(long fileSize)
