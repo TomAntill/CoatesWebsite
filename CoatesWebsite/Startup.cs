@@ -39,6 +39,7 @@ namespace CoatesWebsite
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IPictureDAL, PictureDAL>();
+            services.AddScoped<IMediaService, MediaService>();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //.AddEntityFrameworkStores<CoatesContext>()

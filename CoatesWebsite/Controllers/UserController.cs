@@ -121,7 +121,6 @@ namespace CoatesWebsite.Controllers
                     return View();
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View();
         }

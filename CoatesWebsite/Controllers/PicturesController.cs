@@ -25,14 +25,18 @@ namespace CoatesWebsite.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private IPictureDAL _pictureDAL = null;
+        private IMediaService _mediaService = null;
 
-        public PicturesController(CoatesContext context, ILogger<PicturesController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IPictureDAL pictureDAL) : base (context, userManager, signInManager, logger)
+
+        public PicturesController(CoatesContext context, ILogger<PicturesController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IPictureDAL pictureDAL, IMediaService mediaService) : base (context, userManager, signInManager, logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             this.signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _pictureDAL = pictureDAL ?? throw new ArgumentNullException(nameof(pictureDAL));
+            _mediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
+
         }
 
         public IActionResult Index()
@@ -61,7 +65,9 @@ namespace CoatesWebsite.Controllers
         public async Task<ActionResult> Add(PictureVm request)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-            await _pictureDAL.Add(request);
+            _mediaService.Add(request);
+            _pictureDAL.Add(request);
+
             return RedirectToAction("Add");
         }
 
@@ -91,6 +97,7 @@ namespace CoatesWebsite.Controllers
         public IActionResult Delete(PictureUpdateVm pictureUpdateVm)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
+            _mediaService.Delete(pictureUpdateVm);
             var result = _pictureDAL.Delete(pictureUpdateVm);
 
             if (result.Result == false)
