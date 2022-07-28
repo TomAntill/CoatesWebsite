@@ -1,3 +1,5 @@
+using CoatesWebsite.DAL;
+using CoatesWebsite.DAL.Contracts;
 using CoatesWebsite.Data.Services;
 using CoatesWebsite.DataModels;
 using CoatesWebsite.Models;
@@ -36,6 +38,7 @@ namespace CoatesWebsite
 
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IPictureDAL, PictureDAL>();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //.AddEntityFrameworkStores<CoatesContext>()

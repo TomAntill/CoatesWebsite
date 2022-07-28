@@ -12,6 +12,7 @@ using CoatesWebsite.Data.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using CoatesWebsite.DAL.Contracts;
 
 namespace CoatesWebsite.Controllers
 {
@@ -23,20 +24,21 @@ namespace CoatesWebsite.Controllers
         private readonly ILogger<PicturesController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private IPictureDAL _pictureDAL = null;
 
-        public PicturesController(CoatesContext context, ILogger<PicturesController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) : base (context, userManager, signInManager, logger)
+        public PicturesController(CoatesContext context, ILogger<PicturesController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IPictureDAL pictureDAL) : base (context, userManager, signInManager, logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             this.signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _pictureDAL = pictureDAL ?? throw new ArgumentNullException(nameof(pictureDAL));
         }
 
         public IActionResult Index()
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-
-            var data = _context.Pictures.ToList<Pictures>();
+            var data = _pictureDAL.GetAll().Result;
             return View(data);
         }
 
@@ -44,16 +46,7 @@ namespace CoatesWebsite.Controllers
         public IActionResult Details(int id)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
-
-            PictureUpdateVm pictureVm = new PictureUpdateVm()
-            {
-                Name = picture.Name,
-                ProjectName = picture.ProjectName,
-                PictureCategory = picture.PictureCategory
-            };
-
+            var pictureVm = _pictureDAL.GetById(id).Result;
             return View(pictureVm);
         }
 
@@ -68,39 +61,7 @@ namespace CoatesWebsite.Controllers
         public async Task<ActionResult> Add(PictureVm request)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-            //Add file to root
-            string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
-            //C: \Users\Thoma\source\repos\CoatesWebsite - Copy\CoatesWebsite\wwwroot\assets\img\uploads
-
-            string fileName = request.Photo.FileName;
-            long fileSize = request.Photo.Length;
-            string fileExt = Path.GetExtension(fileName);
-
-            string fileNameWithPath = Path.Combine(path, fileName);
-
-            Guards.Guards.FileSizeToLarge(fileSize);
-            Guards.Guards.FileNameIsUnique(fileNameWithPath);
-            Guards.Guards.InvalidFileExtension(fileExt);
-
-            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-            {
-                await request.Photo.CopyToAsync(stream);
-            }
-
-            //add details to database
-            string pathDb = "/assets/img/uploads";
-            string fileNameWithPathDb = Path.Combine(pathDb, fileName);
-            var picture = new Pictures
-            {
-                Name = request.Name,
-                PictureCategory = request.PictureCategory,
-                ProjectName = request.ProjectName,
-                Path = fileNameWithPathDb
-            };
-
-            _context.Pictures.Add(picture);
-            await _context.SaveChangesAsync();
-
+            await _pictureDAL.Add(request);
             return RedirectToAction("Add");
         }
 
@@ -108,15 +69,7 @@ namespace CoatesWebsite.Controllers
         public IActionResult Edit(int id)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
-
-            PictureUpdateVm pictureUpdateVm = new PictureUpdateVm()
-            {
-                Name = picture.Name,
-                ProjectName = picture.ProjectName,
-                PictureCategory = picture.PictureCategory,
-                Id = id
-            };
+            var pictureUpdateVm = _pictureDAL.GetById(id).Result;
             return View(pictureUpdateVm);
         }
 
@@ -124,46 +77,26 @@ namespace CoatesWebsite.Controllers
         public IActionResult Edit(PictureUpdateVm pictureUpdateVm)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == pictureUpdateVm.Id);
-          
-            //Update database details
-            picture.Name = pictureUpdateVm.Name;
-            picture.PictureCategory = pictureUpdateVm.PictureCategory;
-            picture.ProjectName = pictureUpdateVm.ProjectName;
-
-            _context.SaveChanges();
+            _pictureDAL.Edit(pictureUpdateVm);
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
         public IActionResult Delete(int id)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == id);
-            PictureUpdateVm pictureUpdateVm = new PictureUpdateVm()
-            {
-                Name = picture.Name,
-                ProjectName = picture.ProjectName,
-                PictureCategory = picture.PictureCategory,
-                Id = id
-            };
+            var pictureUpdateVm = _pictureDAL.GetById(id).Result;
             return View(pictureUpdateVm);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult Delete(PictureUpdateVm pictureUpdateVm)
         {
             IsUserAuthorised(ADMIN_ROLE_CODE);
-            //get picture details
-            Pictures picture = _context.Pictures.FirstOrDefault(x => x.Id == pictureUpdateVm.Id);
-            if (picture == null) return View("NotFound");
+            var result = _pictureDAL.Delete(pictureUpdateVm);
 
-            //delete photo in wwwroot
-            System.IO.File.Delete(picture.Path);
-
-            //delete database entry
-            _context.Pictures.Remove(picture);
-            _context.SaveChanges();
+            if (result.Result == false)
+            {
+                return View("NotFound");
+            }
             return RedirectToAction(nameof(Index));
         }
     }
