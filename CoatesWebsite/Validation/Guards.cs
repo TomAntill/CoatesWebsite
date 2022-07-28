@@ -1,5 +1,6 @@
 ﻿using CoatesWebsite.DataModels;
 using CoatesWebsite.Exceptions;
+using CoatesWebsite.Validation;
 using CoatesWebsite.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,12 @@ namespace CoatesWebsite.Guards
         {
             foreach (Pictures file in files)
             {
-                if(fileName == file.Name)
+                var strimmedName = Helpers.StrimPictureName(file.Path);
+                //string file name
+                // "/assets/img/uploads\\balcony.jpg"
+                // "gallery2.jpg"
+
+                if (fileName == strimmedName)
                 {
                     throw new FileNameAlreadyExistsException("File name already exists");
                 }
