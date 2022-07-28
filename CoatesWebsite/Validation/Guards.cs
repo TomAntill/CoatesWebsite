@@ -1,5 +1,6 @@
 ﻿using CoatesWebsite.DataModels;
 using CoatesWebsite.Exceptions;
+using CoatesWebsite.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,5 @@ namespace CoatesWebsite.Guards
                 throw new InvalidFileExtensionException("File extension incorrect");
             }
         }
-
-
     }
 }

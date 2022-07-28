@@ -1,6 +1,7 @@
 ﻿using CoatesWebsite.Areas.Identity.Pages.Account;
 using CoatesWebsite.DataModels;
 using CoatesWebsite.Models;
+using CoatesWebsite.Validation;
 using CoatesWebsite.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -58,9 +59,7 @@ namespace CoatesWebsite.Controllers
                 return RedirectToAction("index", "user");
             }
 
-            Regex r = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^'&*-]).{8,}$");
-
-            if (r.IsMatch(request.Password))
+            if (Helpers.PasswordFormatValidation(request) == true)
             {
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
