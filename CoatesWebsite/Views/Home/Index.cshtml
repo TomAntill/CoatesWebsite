@@ -46,7 +46,7 @@
                         </div>
                         <div class="description">
                             <h4 class="info-title">Gallery</h4>
-                            <p class="description">Please take some time to browse through an album of some work I have completed.</p>
+                            <p class="description">Please take some time to browse through a photo gallery of some of my work.</p>
                             <a href="#gallery" class="btn btn-link btn-danger">See more</a>
                         </div>
                     </div>
@@ -79,72 +79,59 @@
         </div>
     </div>
     <!-- End Placeholder icons -->
-    <!-- Gallery -->
-    <div class="main">
+    <!-- About -->
+    <div class="main text-center">
         <div class="section text-center">
-            <a id="gallery"></a>
-            <div style="background-color: #eef1ef !important">
-                <br />
-                <br />
+            <div style="width:60% !important" class="container">
+                <h2 class="text-center" style="color:#d1b181 !important">About</h2>
+                <p>
+                    <br />
+                    With over 10 years experience in carpentry I can offer a service for any project, from full refurbishments to roofing, worksurfaces, fencing and even hand made furniture.
+                    Materials and parts supplied will be covered by a manufacturers guarantee or warranty. This usually guarantees replacement or repair of faulty goods within a fixed period which is usually 12 months.
+                    Amongst other things, I specialize in bespoke carpentry. With hand made furniture with a range of styles I am confident I can provide you with your exact wants and needs.
+                    <br />
+                    <br />
+                    I offer free quotes and I aim to provide a written estimate within 48 hours. If you have any questions, or would like a quote, please do not hesitate to get in touch.
+                </p>
             </div>
-            <h2 class="text-center" style="color:#d1b181 !important">Gallery</h2>
-            <div class="nav-tabs-navigation">
-                <div class="nav-tabs-wrapper">
-                    <ul id="tabs" class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">
-                                All
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#carpentry" role="tab" aria-selected="false"> Bespoke Carpentry</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="false"> Furniture</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="false"> Concrete Worktops</a>
-                        </li>
-                    </ul>
+        </div>
+    </div>
+        <!-- End About -->
+        <!-- Gallery -->
+        <div class="main">
+            <div class="section text-center">
+                <a id="gallery"></a>
+                <div style="background-color: #eef1ef !important">
+                    <br />
+                    <br />
                 </div>
-            </div>
-            <div id="my-tab-content" class="tab-content text-center">
-                <div class="tab-pane active" id="all" role="tabpanel">
-                    <div class="container">
-                        <div class="row">
-                            <div class="gallery" style="align-items:center">
-                                @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms)
-                                {
-                                    <figure class="galleryImageWrapper">
-                                        <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                    </figure>
-                                }
-                            </div>
-                        </div>
+                <h2 class="text-center" style="color:#d1b181 !important">Gallery</h2>
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <ul id="tabs" class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">
+                                    All
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#carpentry" role="tab" aria-selected="false"> Bespoke Carpentry</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="false"> Furniture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="false"> Concrete Worktops</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="tab-pane" id="carpentry" role="tabpanel">
-                    <div class="container">
-                        <div class="row">
-                            <div class="gallery">
-                                @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                               .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry))
-                                {
-                                    <figure class="galleryImageWrapper">
-                                        <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                    </figure>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="furniture" role="tabpanel">
+                <div id="my-tab-content" class="tab-content text-center">
                     <div class="tab-pane active" id="all" role="tabpanel">
                         <div class="container">
                             <div class="row">
-                                <div class="gallery">
-                                    @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                     .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.Furniture))
+                                <div class="gallery" style="align-items:center">
+                                    @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms)
                                     {
                                         <figure class="galleryImageWrapper">
                                             <img src=@pictureVm.Path alt="" class="galleryImage" />
@@ -154,19 +141,51 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane" id="worktops" role="tabpanel">
-                    <div class="tab-pane active" id="all" role="tabpanel">
+                    <div class="tab-pane" id="carpentry" role="tabpanel">
                         <div class="container">
                             <div class="row">
                                 <div class="gallery">
                                     @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                    .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.ConcreteTops))
+                               .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry))
                                     {
                                         <figure class="galleryImageWrapper">
                                             <img src=@pictureVm.Path alt="" class="galleryImage" />
                                         </figure>
                                     }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="furniture" role="tabpanel">
+                        <div class="tab-pane active" id="all" role="tabpanel">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="gallery">
+                                        @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
+                                     .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.Furniture))
+                                        {
+                                            <figure class="galleryImageWrapper">
+                                                <img src=@pictureVm.Path alt="" class="galleryImage" />
+                                            </figure>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="worktops" role="tabpanel">
+                        <div class="tab-pane active" id="all" role="tabpanel">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="gallery">
+                                        @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
+                                    .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.ConcreteTops))
+                                        {
+                                            <figure class="galleryImageWrapper">
+                                                <img src=@pictureVm.Path alt="" class="galleryImage" />
+                                            </figure>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -174,63 +193,143 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Gallery end -->
-    <!-- Projects -->
-    <div class="main">
-        <div class="section text-center">
-            <a id="projects"></a>
-            <div style="background-color: #eef1ef !important">
-                <br />
-                <br />
-            </div>
-            <h2 class="text-center" style="color: #d1b181 !important">Renovations</h2>
-            <div class="nav-tabs-navigation">
-                <div class="nav-tabs-wrapper">
-                    <ul id="tabs" class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#summerhouse" role="tab" aria-selected="true">
-                                Summerhouse
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tregonwellroad" role="tab" aria-selected="false"> Tregonwell Road</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#ponsfordroad" role="tab" aria-selected="false"> Ponsford Road</a>
-                        </li>
-                    </ul>
+        <!-- Gallery end -->
+        <!-- Projects -->
+        <div class="main">
+            <div class="section text-center">
+                <a id="projects"></a>
+                <div style="background-color: #eef1ef !important">
+                    <br />
+                    <br />
                 </div>
-            </div>
-            <div id="my-tab-content" class="tab-content text-center">
-                @*Summer House*@
-                <div class="tab-pane active" id="summerhouse" role="tabpanel">
-                    @*<p> Information about the Summerhouse project</p>*@
-                    <div class="section pt-o" id="carousel-two">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-8 ml-auto mr-auto">
-                                    <div class="card page-carousel">
-                                        <div id="carouselExampleIndicatorsTwo" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
-                                                {
-                                                    <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                                                }
-                                            </ol>
-                                            <div class="carousel-inner" role="listbox">
-                                                @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
-                                                {
-                                                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                                                        <img style="max-height:500px" class="d-block img-fluid" src="@Model.SummerhousePictureVms[i].Path" alt="First slide" />
-                                                    </div>
-                                                }
-                                                <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsTwo" role="button" data-slide="prev">
+                <h2 class="text-center" style="color: #d1b181 !important">Renovations</h2>
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <ul id="tabs" class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#summerhouse" role="tab" aria-selected="true">
+                                    Summerhouse
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tregonwellroad" role="tab" aria-selected="false"> Tregonwell Road</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#ponsfordroad" role="tab" aria-selected="false"> Ponsford Road</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="my-tab-content" class="tab-content text-center">
+                    @*Summer House*@
+                    <div class="tab-pane active" id="summerhouse" role="tabpanel">
+                        @*<p> Information about the Summerhouse project</p>*@
+                        <div class="section pt-o" id="carousel-two">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 ml-auto mr-auto">
+                                        <div class="card page-carousel">
+                                            <div id="carouselExampleIndicatorsTwo" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
+                                                    {
+                                                        <li data-target="#carouselExampleIndicatorsTwo" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                    }
+                                                </ol>
+                                                <div class="carousel-inner" role="listbox">
+                                                    @for (int i = 0; i < Model.SummerhousePictureVms.Count; i++)
+                                                    {
+                                                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                                                            <img style="max-height:500px" class="d-block img-fluid" src="@Model.SummerhousePictureVms[i].Path" alt="First slide" />
+                                                        </div>
+                                                    }
+                                                    <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsTwo" role="button" data-slide="prev">
+                                                        <span class="fa fa-angle-left">
+                                                        </span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsTwo" role="button" data-slide="next">
+                                                        <span class="fa fa-angle-right">
+                                                        </span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Tregonwell Road*@
+                    <div class="tab-pane" id="tregonwellroad" role="tabpanel">
+                        @*<p>"TREGONWELL ROAD PROJECT"</p>*@
+                        <div class="section pt-o" id="carousel-three">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 ml-auto mr-auto">
+                                        <div class="card page-carousel">
+                                            <div id="carouselExampleIndicatorsThree" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
+                                                    {
+                                                        <li data-target="#carouselExampleIndicatorsThree" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                    }
+                                                </ol>
+                                                <div class="carousel-inner" role="listbox">
+                                                    @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
+                                                    {
+                                                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                                                            <img class="d-block img-fluid" src="@Model.TregonwellRoadPictureVms[i].Path" alt="First slide" />
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsThree" role="button" data-slide="prev">
                                                     <span class="fa fa-angle-left">
                                                     </span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
-                                                <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsTwo" role="button" data-slide="next">
+                                                <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsThree" role="button" data-slide="next">
+                                                    <span class="fa fa-angle-right">
+                                                    </span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Ponsford road*@
+                    <div class="tab-pane" id="ponsfordroad" role="tabpanel">
+                        @*<p>"PONSFORD ROAD PROJECT"</p>*@
+                        <div class="section pt-o" id="carousel-four">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 ml-auto mr-auto">
+                                        <div class="card page-carousel">
+                                            <div id="carouselExampleIndicatorsFour" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
+                                                    {
+                                                        <li data-target="#carouselExampleIndicatorsFour" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                                    }
+                                                </ol>
+                                                <div class="carousel-inner" role="listbox">
+                                                    @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
+                                                    {
+                                                        <div style="text-align:center" class="carousel-item @(i == 0 ? "active" : "")">
+                                                            <img style="max-height:600px; width:auto" class="d-block img-fluid" src="@Model.PonsfordRoadPictureVms[i].Path" alt="First slide" />
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsFour" role="button" data-slide="prev">
+                                                    <span class="fa fa-angle-left">
+                                                    </span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsFour" role="button" data-slide="next">
                                                     <span class="fa fa-angle-right">
                                                     </span>
                                                     <span class="sr-only">Next</span>
@@ -243,160 +342,79 @@
                         </div>
                     </div>
                 </div>
-                @*Tregonwell Road*@
-                <div class="tab-pane" id="tregonwellroad" role="tabpanel">
-                    @*<p>"TREGONWELL ROAD PROJECT"</p>*@
-                    <div class="section pt-o" id="carousel-three">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-8 ml-auto mr-auto">
-                                    <div class="card page-carousel">
-                                        <div id="carouselExampleIndicatorsThree" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
-                                                {
-                                                    <li data-target="#carouselExampleIndicatorsThree" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                                                }
-                                            </ol>
-                                            <div class="carousel-inner" role="listbox">
-                                                @for (int i = 0; i < Model.TregonwellRoadPictureVms.Count; i++)
-                                                {
-                                                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                                                        <img class="d-block img-fluid" src="@Model.TregonwellRoadPictureVms[i].Path" alt="First slide" />
-                                                    </div>
-                                                }
-                                            </div>
-                                            <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsThree" role="button" data-slide="prev">
-                                                <span class="fa fa-angle-left">
-                                                </span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsThree" role="button" data-slide="next">
-                                                <span class="fa fa-angle-right">
-                                                </span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <!-- Projects end -->
+        <!-- Contact me -->
+        <a id="contact"></a>
+        <div style="background-color: #eef1ef !important">
+            <br />
+            <br />
+        </div>
+        <div class="section profile-content">
+            <div class="container">
+                <div class="owner">
+                    <div class="avatar">
+                        <img src="../assets/img/tom-profile.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                    </div>
+                    <div class="name">
+                        <h4 class="title">
+                            Tom Coates
+                            <br />
+                        </h4>
+                        <h6 class="description">General Building & Carpentry</h6>
                     </div>
                 </div>
-                @*Ponsford road*@
-                <div class="tab-pane" id="ponsfordroad" role="tabpanel">
-                    @*<p>"PONSFORD ROAD PROJECT"</p>*@
-                    <div class="section pt-o" id="carousel-four">
-                        <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto text-center">
+                        <p>Please feel free to get in touch for a quote, including any carpentry, roofing, plastering, landscaping or fencing work. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="text-center" style="color: #584f4a !important">Get in touch</h2>
+                        <form asp-action="Index" class="contact-form">
                             <div class="row">
-                                <div class="col-md-8 ml-auto mr-auto">
-                                    <div class="card page-carousel">
-                                        <div id="carouselExampleIndicatorsFour" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
-                                                {
-                                                    <li data-target="#carouselExampleIndicatorsFour" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                                                }
-                                            </ol>
-                                            <div class="carousel-inner" role="listbox">
-                                                @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
-                                                {
-                                                    <div style="text-align:center" class="carousel-item @(i == 0 ? "active" : "")">
-                                                        <img style="max-height:600px; width:auto" class="d-block img-fluid" src="@Model.PonsfordRoadPictureVms[i].Path" alt="First slide" />
-                                                    </div>
-                                                }
-                                            </div>
-                                            <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicatorsFour" role="button" data-slide="prev">
-                                                <span class="fa fa-angle-left">
-                                                </span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicatorsFour" role="button" data-slide="next">
-                                                <span class="fa fa-angle-right">
-                                                </span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
+                                <div class="col-md-6">
+                                    <label style="color: #584f4a !important">Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="nc-icon nc-single-02"></i>
+                                            </span>
                                         </div>
+                                        <input asp-for="EmailVm.Name" class="form-control" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color: #584f4a !important">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="nc-icon nc-email-85"></i>
+                                            </span>
+                                        </div>
+                                        <input asp-for="EmailVm.EmailAddress" class="form-control" placeholder="Email">
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <label style="color: #584f4a !important">Message</label>
+                            <textarea asp-for="EmailVm.Message" class="form-control" rows="4" placeholder="Message..."></textarea>
+                            <div class="row">
+                                <div class="col-md-4 ml-auto mr-auto" style="text-align: center !important">
+                                    <button class="btn btn-danger btn-lg btn-fill">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Projects end -->
-    <!-- Contact me -->
-    <a id="contact"></a>
-    <div style="background-color: #eef1ef !important">
-        <br />
-        <br />
-    </div>
-    <div class="section profile-content">
-        <div class="container">
-            <div class="owner">
-                <div class="avatar">
-                    <img src="../assets/img/tom-profile.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-                <div class="name">
-                    <h4 class="title">
-                        Tom Coates
-                        <br />
-                    </h4>
-                    <h6 class="description">General Building & Carpentry</h6>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 ml-auto mr-auto text-center">
-                    <p>Please feel free to get in touch for a quote on any carpentry, roofing, plastering, landscaping or fencing work. </p>
-                </div>
-            </div>
+        <div class="section landing-section">
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 ml-auto mr-auto">
-                    <h2 class="text-center" style="color: #584f4a !important">Get in touch</h2>
-                    <form asp-action="Index" class="contact-form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label style="color: #584f4a !important">Name</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="nc-icon nc-single-02"></i>
-                                        </span>
-                                    </div>
-                                    <input asp-for="EmailVm.Name" class="form-control" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label style="color: #584f4a !important">Email</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="nc-icon nc-email-85"></i>
-                                        </span>
-                                    </div>
-                                    <input asp-for="EmailVm.EmailAddress" class="form-control" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-                        <label style="color: #584f4a !important">Message</label>
-                        <textarea asp-for="EmailVm.Message" class="form-control" rows="4" placeholder="Message..."></textarea>
-                        <div class="row">
-                            <div class="col-md-4 ml-auto mr-auto" style="text-align: center !important">
-                                <button class="btn btn-danger btn-lg btn-fill">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section landing-section">
-    </div>
-    <!-- End Contact me -->
+        <!-- End Contact me -->
 
 </body>
 </html>

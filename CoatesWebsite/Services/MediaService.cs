@@ -36,8 +36,10 @@ namespace CoatesWebsite.Data.Services
             using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
             {
                 await request.Photo.CopyToAsync(stream);
+
                 return stream;
             }
+            //System.IO.File.Move(request.Photo.FileName, request.Name + Path.GetExtension(request.Photo.FileName));
         }
         public async Task<bool> Delete(PictureUpdateVm pictureUpdateVm)
         {

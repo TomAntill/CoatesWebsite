@@ -36,7 +36,6 @@ namespace CoatesWebsite.Validation
         }
         public static string StrimPictureName(string name)
         {
-
             string strimmedName = name.Substring(20);
             return strimmedName;
         }
