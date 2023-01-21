@@ -18,6 +18,19 @@
             height: auto;
         }
 
+        .project-img{
+            margin: auto;
+            background-color: transparent !important;
+        }
+
+        .project-img-wrapper {
+            background-color: #eef1ef !important;
+        }
+
+        .page-header-bg-img {
+            background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255,255,255,0.4), rgba(255,255,255,0), rgba(255, 255,255,0)), url(../assets/img/uploads/WoodenGate.jpg);
+        }
+
     </style>
 </head>
 
@@ -27,7 +40,7 @@
     <!-- Main image -->
     @*<div class="page-header" data-parallax="true" style="background-image: url('../assets/img/summerhouse-front.jpg');">
         </div>*@
-    <div class="page-header" data-parallax="true" style="background-image: url('../assets/img/uploads/WoodenGate.jpg');">
+    <div class="page-header page-header-bg-img" data-parallax="true">
     </div>
     <!-- End Main Image -->
     <!-- Placeholder icons -->
@@ -87,11 +100,10 @@
                 <p>
                     <br />
                     With over 10 years experience in carpentry I can offer a service for any project, from full refurbishments to roofing, worksurfaces, fencing and even hand made furniture.
-                    Materials and parts supplied will be covered by a manufacturers guarantee or warranty. This usually guarantees replacement or repair of faulty goods within a fixed period which is usually 12 months.
-                    Amongst other things, I specialize in bespoke carpentry. With hand made furniture with a range of styles I am confident I can provide you with your exact wants and needs.
+                    Amongst other things, I specialize in bespoke carpentry. With hand made furniture in a range of styles I am confident I can provide you with your exact wants and needs.
                     <br />
                     <br />
-                    I offer free quotes and I aim to provide a written estimate within 48 hours. If you have any questions, or would like a quote, please do not hesitate to get in touch.
+                    I offer free estimates and I aim to provide a written estimate within 48 hours. If you have any questions, or would like a estimate, please do not hesitate to get in touch.
                 </p>
             </div>
         </div>
@@ -121,7 +133,7 @@
                                 <a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="false"> Furniture</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="false"> Concrete Worktops</a>
+                                <a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="false"> Kitchens & Work Surfaces</a>
                             </li>
                         </ul>
                     </div>
@@ -319,8 +331,8 @@
                                                 <div class="carousel-inner" role="listbox">
                                                     @for (int i = 0; i < Model.PonsfordRoadPictureVms.Count; i++)
                                                     {
-                                                        <div style="text-align:center" class="carousel-item @(i == 0 ? "active" : "")">
-                                                            <img style="max-height:600px; width:auto" class="d-block img-fluid" src="@Model.PonsfordRoadPictureVms[i].Path" alt="First slide" />
+                                                        <div style="text-align:center" class="project-img-wrapper carousel-item @(i == 0 ? "active" : "")">
+                                                            <img style="max-height:600px; width:auto" class="d-block img-fluid project-img" src="@Model.PonsfordRoadPictureVms[i].Path" alt="First slide" />
                                                         </div>
                                                     }
                                                 </div>
@@ -367,7 +379,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto text-center">
-                        <p>Please feel free to get in touch for a quote, including any carpentry, roofing, plastering, landscaping or fencing work. </p>
+                        <p>Please feel free to get in touch for an estimate, including any carpentry, roofing, plastering, landscaping or fencing work. </p>
                     </div>
                 </div>
             </div>
