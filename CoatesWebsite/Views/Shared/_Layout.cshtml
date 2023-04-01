@@ -16,15 +16,34 @@
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
+    <style>
+        .main-navbar {
+            padding-left: 0px;
+            margin-left: 100px;
+            margin-right: 100px;
+            max-width: 1800px !important;
+        }
+        @@media(max-width:800px) {
+            .main-navbar {
+                margin-left: 0px;
+                margin-right: 40px;
+            }          
+        }
+
+        .img-overridable-bg {
+            filter: opacity(0.5) drop-shadow(0 0 0 black) !important;
+        }
+
+    </style>
 </head>
 
 <body class="landing-page sidebar-collapse">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
-        <div class="container" style="padding-left: 0px; margin-left: 100px; margin-right: 100px; max-width: 1800px !important">
+        <div class="container main-navbar">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="#top" style="margin: 0px !important; border: 0px !important; padding: 0px !important" rel="tooltip" title="Home Page" data-placement="bottom">
-                    <img style="width: 120px; margin: 0px !important; border: 0px !important; padding: 0px !important" src="./assets/img/business-card.png" />
+                <a class="navbar-brand navbar-transparent-override" href="#top" style="margin: 0px !important; border: 0px !important; padding: 0px !important" rel="tooltip" title="Home Page" data-placement="bottom">
+                    <img class="img-overridable-bg-hdnle img-overridable-bg" style="width: 190px; margin: 0px !important; border: 0px !important; padding: 0px !important" src="./assets/img/transparentlogo.png" />
                 </a>
                 <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
@@ -56,7 +75,7 @@
 <!--  Footer -->
 <footer class="footer   footer-white ">
     <div class="container">
-        <div class="row">
+        <div class="row" style="justify-content: center">
             <nav class="footer-nav">
                 <ul>
                     <li style="color:#d1b181 !important">
@@ -127,6 +146,18 @@
     }
 
     popup.init()
+
+    window.onscroll = function () { didtheyscroll() };
+
+    function didtheyscroll() {
+        if ($(document).scrollTop() > 50) {
+            $('.img-overridable-bg-hdnle').removeClass('img-overridable-bg');
+        }
+
+        if ($(document).scrollTop() < 50) {
+            $('.img-overridable-bg-hdnle').addClass('img-overridable-bg');
+        }
+    }
 
 </script>
 
