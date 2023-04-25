@@ -30,6 +30,14 @@
             }          
         }
 
+        @@media (max-width: 455px) {
+            .mobileFooter {
+                text-align: center !important;
+                line-height: 1px !important;
+                font-size: 8px !important;
+            }
+        }
+
         .img-overridable-bg {
             filter: opacity(0.5) drop-shadow(0 0 0 black) !important;
         }
@@ -73,18 +81,18 @@
     </body>
 </html>
 <!--  Footer -->
-<footer class="footer   footer-white ">
+<footer class="footer mobileFooter footer-white ">
     <div class="container">
         <div class="row" style="justify-content: center">
             <nav class="footer-nav">
-                <ul>
-                    <li style="color:#d1b181 !important">
+                <ul class="mobileFooter">
+                    <li style="color:#d1b181 !important" class="mobileFooter">
                         Tom Coates
                     </li>
-                    <li>
-                        <a href="mailto:tom_coates@aol.co.uk" target="_blank">EMAIL ADDRESS</a>
+                    <li class="mobileFooter">
+                        <a href="mailto:tom_coates@aol.co.uk" target="_blank">tom_coates@aol.co.uk</a>
                     </li>
-                    <li>
+                    <li class="mobileFooter">
                         <a href="tel:07929982172" target="_blank">+44 7929 982172</a>
                     </li>
                 </ul>
