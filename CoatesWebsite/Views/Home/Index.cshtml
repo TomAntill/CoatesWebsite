@@ -13,8 +13,6 @@
             height: 250px;
         }
 
-
-
         @@media (max-width: 991px) {
             .galleryImageWrapper {
                height: 75px !important;
@@ -121,14 +119,14 @@
     <section id="projects" class="projects" style="background-color: #eef1ef !important">
         <div class="container" data-aos="fade-up" >
 
-            <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+            <div class="portfolio-isotope" data-portfolio-filter=".filter-Furniture" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
                 <h2 class="text-center" style="color:#d1b181 !important">Gallery</h2>
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
                         <ul id="tabs" role="tablist" class="portfolio-flters nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
-                            <li data-filter="*" class="filter-active nav-item"><a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">All</a></li>
+                            <li data-filter="*" class="nav-item"><a class="nav-link" data-toggle="tab" href="#all" role="tab" aria-selected="true">All</a></li>
                             <li class="nav-item" data-filter=".filter-BespokeCarpentry"><a class="nav-link" data-toggle="tab" href="#carpentry" role="tab" aria-selected="true">Bespoke Carpentry</a></li>
-                            <li class="nav-item" data-filter=".filter-Furniture"><a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="true">Furniture</a></li>
+                            <li class="filter-active nav-item" data-filter=".filter-Furniture"><a class="nav-link active" data-toggle="tab" href="#furniture" role="tab" aria-selected="true">Furniture</a></li>
                             <li class="nav-item" data-filter=".filter-ConcreteTops"><a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="true">Kitchen & Work Surfaces</a></li>
                         </ul>
                     </div>
