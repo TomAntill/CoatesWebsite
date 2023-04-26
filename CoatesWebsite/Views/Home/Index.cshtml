@@ -117,103 +117,45 @@
         </div>
     </div>
         <!-- End About -->
-        <!-- Gallery -->
-        <div class="main">
-            <div class="section text-center">
-                <a id="gallery"></a>
-                <div style="background-color: #eef1ef !important">
-                    <br />
-                    <br />
-                </div>
+        <!-- Gallery v2 -->
+    <section id="projects" class="projects" style="background-color: #eef1ef !important">
+        <div class="container" data-aos="fade-up" >
+
+            <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
                 <h2 class="text-center" style="color:#d1b181 !important">Gallery</h2>
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
-                        <ul id="tabs" class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">
-                                    All
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#carpentry" role="tab" aria-selected="false"> Bespoke Carpentry</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="false"> Furniture</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="false"> Kitchens & Work Surfaces</a>
-                            </li>
+                        <ul id="tabs" role="tablist" class="portfolio-flters nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+                            <li data-filter="*" class="filter-active nav-item"><a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">All</a></li>
+                            <li class="nav-item" data-filter=".filter-BespokeCarpentry"><a class="nav-link" data-toggle="tab" href="#carpentry" role="tab" aria-selected="true">Bespoke Carpentry</a></li>
+                            <li class="nav-item" data-filter=".filter-Furniture"><a class="nav-link" data-toggle="tab" href="#furniture" role="tab" aria-selected="true">Furniture</a></li>
+                            <li class="nav-item" data-filter=".filter-ConcreteTops"><a class="nav-link" data-toggle="tab" href="#worktops" role="tab" aria-selected="true">Kitchen & Work Surfaces</a></li>
                         </ul>
                     </div>
                 </div>
-                <div id="my-tab-content" class="tab-content text-center">
-                    <div class="tab-pane active" id="all" role="tabpanel">
-                        <div class="container">
-                            <div class="row">
-                                <div class="gallery" style="align-items:center">
-                                    @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms)
-                                    {
-                                        <figure class="galleryImageWrapper">
-                                            <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                        </figure>
-                                    }
+
+                <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                    @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms)
+                    {
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-@pictureVm.PictureCategory.ToString()">
+                            <div class="portfolio-content h-100">
+                                <img src="@pictureVm.Path" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <a href="@pictureVm.Path" title="@pictureVm.PictureCategory.ToString()" data-gallery="portfolio-gallery-@pictureVm.PictureCategory.ToString()" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="carpentry" role="tabpanel">
-                        <div class="container">
-                            <div class="row">
-                                <div class="gallery">
-                                    @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                               .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.BespokeCarpentry))
-                                    {
-                                        <figure class="galleryImageWrapper">
-                                            <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                        </figure>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="furniture" role="tabpanel">
-                        <div class="tab-pane active" id="all" role="tabpanel">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="gallery">
-                                        @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                     .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.Furniture))
-                                        {
-                                            <figure class="galleryImageWrapper">
-                                                <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                            </figure>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="worktops" role="tabpanel">
-                        <div class="tab-pane active" id="all" role="tabpanel">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="gallery">
-                                        @foreach (CoatesWebsite.ViewModels.PictureVm pictureVm in Model.PictureVms
-                                    .Where(x => x.PictureCategory == CoatesWebsite.Data.Enums.PictureCategory.ConcreteTops))
-                                        {
-                                            <figure class="galleryImageWrapper">
-                                                <img src=@pictureVm.Path alt="" class="galleryImage" />
-                                            </figure>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
+
             </div>
+
         </div>
-        <!-- Gallery end -->
+    </section>
+
+
+        <!-- End Gallery v2 -->
+
         <!-- Projects -->
         <div class="main">
             <div class="section text-center">
