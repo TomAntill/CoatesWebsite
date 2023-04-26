@@ -51,7 +51,7 @@ namespace CoatesWebsite
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/account/login";
+                options.LoginPath = $"/user/login";
                 options.LogoutPath = $"/account/logout";
                 options.AccessDeniedPath = $"/account/accessDenied";
             });

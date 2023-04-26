@@ -35,7 +35,7 @@ namespace CoatesWebsite.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.UserRoles.SingleOrDefault(x => x.UserId == userId && x.RoleId == roleId);
             if (user == null)
-                throw new Exception("you weren't auth!");
+                RedirectToAction("login", "user");
         }
     }
 }
