@@ -18,7 +18,8 @@ namespace CoatesWebsite.Data.Services
         }
         //private const string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
         private const string path = "/home/site/wwwroot/wwwroot/assets/img/uploads";
-        private const string pathDb = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot";
+        private const string pathDb = "/home/site/wwwroot/wwwroot";
+        //private const string pathDb = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot";
 
 
         public async Task<FileStream> Add(PictureVm request)
@@ -48,6 +49,7 @@ namespace CoatesWebsite.Data.Services
             if (picture == null) return false;
 
             var pathToDelete = pathDb + picture.Path;
+
             System.IO.File.Delete(pathToDelete);
 
             return true;
