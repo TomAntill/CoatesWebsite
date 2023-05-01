@@ -17,7 +17,7 @@ namespace CoatesWebsite.Data.Services
             _context = context;
         }
         //private const string path = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot/assets/img/uploads";
-        private const string path = "/wwwroot/assets/img/uploads";
+        private const string path = "/home/site/wwwroot/wwwroot/assets/img/uploads";
         private const string pathDb = "/Users/Thoma/source/repos/CoatesWebsite - Copy/CoatesWebsite/wwwroot";
 
 
