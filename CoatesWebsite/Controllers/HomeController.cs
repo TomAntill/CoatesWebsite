@@ -4,11 +4,7 @@ using CoatesWebsite.Models;
 using CoatesWebsite.Validation;
 using CoatesWebsite.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,18 +32,6 @@ namespace CoatesWebsite.Controllers
             indexVm.PictureVms = pictureVms;
 
             Helpers.CleanUpPaths(indexVm);
-
-            //var x = Directory.GetCurrentDirectory();
-
-            //// clean up paths
-            //foreach (var item in indexVm.PictureVms)
-            //{
-            //    item.Path = item.Path.Replace(x, "");
-            //    item.Path = item.Path.Replace("\\", "/");
-            //    item.Path = item.Path.Replace("wwwroot", "");
-            //    item.Path = item.Path.Replace("//", "");
-            //}
-
             return View(indexVm);
         }
 
