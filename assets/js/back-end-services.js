@@ -152,6 +152,40 @@ async function addImage(name, file, websiteName, uploadCategory, projectName) {
   xhr.send(formData);
 }
 
+function jwtSignup(userName, password, websiteName){
+  return new Promise((resolve, reject) => {
+    url = setAPIUrl("JwtSignup");
+
+    var finalUrl = url + "?username=" + encodeURIComponent(userName) + "&password=" + encodeURIComponent(password) + "&websiteName=" + encodeURIComponent(websiteName);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', finalUrl);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          saveTokenToCookie(response.token);
+
+          // Resolve the promise to indicate successful signup/login
+          resolve(response);
+        } else {
+          
+          // Store the failure message in localStorage
+          localStorage.setItem("failureMessage", "Signup failed. Please check your credentials.");
+
+          console.error(xhr.status);
+
+          // Reject the promise to indicate login failure
+          reject(new Error(xhr.status));
+        }
+      }
+    };
+    xhr.send();
+  });
+
+}
+
 
 function jwtLogin(userName, password) {
   return new Promise((resolve, reject) => {
@@ -267,6 +301,9 @@ function setAPIUrl(action) {
       break;
     case "JwtLogin":
         endpoint = "/auth/JwtLogin";
+        break;
+    case "JwtSignup":
+        endpoint = "/auth/AddSystemUser";
         break;
     default:
       // Handle any other actions or set a default endpoint
