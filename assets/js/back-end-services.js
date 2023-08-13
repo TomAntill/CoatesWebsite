@@ -1,17 +1,24 @@
-var loginUrl = 'https://localhost:44311/api/auth/JwtLogin?userName=ruttben@yahoo.com&password=Bigboy123!';
-var at = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1ZmU2YTNjMS04NjUwLTRmYmQtYjk0Ni1lNDMwMjcyODU1ODAiLCJ1bmlxdWVfbmFtZSI6IlJVVFRCRU5AWUFIT08uQ09NIiwid2Vic2l0ZSI6IkNvYXRlc0NhcnBlbnRyeSIsIm5iZiI6MTY4NTA5MTgwOCwiZXhwIjoxNjg1MTc4MjA4LCJpYXQiOjE2ODUwOTE4MDh9.h4ztusyy2Cw-k08YuAPOg_isQ1VgVwX3CWua4i7aAuY';
+var loginUrl =
+  "https://localhost:44311/api/auth/JwtLogin?userName=ruttben@yahoo.com&password=Bigboy123!";
+var at =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1ZmU2YTNjMS04NjUwLTRmYmQtYjk0Ni1lNDMwMjcyODU1ODAiLCJ1bmlxdWVfbmFtZSI6IlJVVFRCRU5AWUFIT08uQ09NIiwid2Vic2l0ZSI6IkNvYXRlc0NhcnBlbnRyeSIsIm5iZiI6MTY4NTA5MTgwOCwiZXhwIjoxNjg1MTc4MjA4LCJpYXQiOjE2ODUwOTE4MDh9.h4ztusyy2Cw-k08YuAPOg_isQ1VgVwX3CWua4i7aAuY";
 
 //jwtLogin("thomasantill92@gmail.com", "Test12345!");
 
-function updateMedia(websiteName, id, updatedData){
-  const token = getCookieValue('token');
+function updateMedia(websiteName, id, updatedData) {
+  const token = getCookieValue("token");
 
-  const baseUrl = setAPIUrl("update")
-  var finalUrl = baseUrl + "?websiteName=" + encodeURIComponent(websiteName) + "&id=" + encodeURIComponent(id);
+  const baseUrl = setAPIUrl("update");
+  var finalUrl =
+    baseUrl +
+    "?websiteName=" +
+    encodeURIComponent(websiteName) +
+    "&id=" +
+    encodeURIComponent(id);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', finalUrl);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("POST", finalUrl);
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", "Bearer " + token);
 
   // Set the callback function to handle the response
@@ -31,16 +38,21 @@ function updateMedia(websiteName, id, updatedData){
   // Send the updated data as the request body
   xhr.send(updatedDataJSON);
 }
-  
-function deleteMedia(websiteName, id){
-  const token = getCookieValue('token');
 
-  const baseUrl = setAPIUrl("delete")
-  var finalUrl = baseUrl + "?websiteName=" + encodeURIComponent(websiteName) + "&id=" + encodeURIComponent(id);
+function deleteMedia(websiteName, id) {
+  const token = getCookieValue("token");
+
+  const baseUrl = setAPIUrl("delete");
+  var finalUrl =
+    baseUrl +
+    "?websiteName=" +
+    encodeURIComponent(websiteName) +
+    "&id=" +
+    encodeURIComponent(id);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('DELETE', finalUrl);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("DELETE", finalUrl);
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", "Bearer " + token);
 
   xhr.onreadystatechange = function () {
@@ -56,15 +68,20 @@ function deleteMedia(websiteName, id){
   xhr.send();
 }
 
-function getById(websiteName, id){
-  const token = getCookieValue('token');
+function getById(websiteName, id) {
+  const token = getCookieValue("token");
 
-  const baseUrl = setAPIUrl("getById")
-  var finalUrl = baseUrl + "?websiteName=" + encodeURIComponent(websiteName) + "&id=" + encodeURIComponent(id);
+  const baseUrl = setAPIUrl("getById");
+  var finalUrl =
+    baseUrl +
+    "?websiteName=" +
+    encodeURIComponent(websiteName) +
+    "&id=" +
+    encodeURIComponent(id);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', finalUrl);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("GET", finalUrl);
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", "Bearer " + token);
 
   xhr.onreadystatechange = function () {
@@ -99,7 +116,7 @@ function getById(websiteName, id){
 function getCookieValue(cookieName) {
   const name = cookieName + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
-  const cookieArray = decodedCookie.split(';');
+  const cookieArray = decodedCookie.split(";");
 
   for (let i = 0; i < cookieArray.length; i++) {
     let cookie = cookieArray[i].trim();
@@ -120,7 +137,7 @@ function getCookieValue(cookieName) {
 }
 
 async function addImage(name, file, websiteName, uploadCategory, projectName) {
-  const token = getCookieValue('token');
+  const token = getCookieValue("token");
   const url = setAPIUrl("addImage");
 
   const xhr = new XMLHttpRequest();
@@ -143,24 +160,31 @@ async function addImage(name, file, websiteName, uploadCategory, projectName) {
   xhr.setRequestHeader("Authorization", "Bearer " + token);
 
   const formData = new FormData();
-  formData.append('name', name);
-  formData.append('file', file);
-  formData.append('websiteName', websiteName);
-  formData.append('uploadCategory', uploadCategory);
-  formData.append('projectName', projectName);
+  formData.append("name", name);
+  formData.append("file", file);
+  formData.append("websiteName", websiteName);
+  formData.append("uploadCategory", uploadCategory);
+  formData.append("projectName", projectName);
 
   xhr.send(formData);
 }
 
-function jwtSignup(userName, password, websiteName){
+function jwtSignup(userName, password, websiteName) {
   return new Promise((resolve, reject) => {
     url = setAPIUrl("JwtSignup");
 
-    var finalUrl = url + "?username=" + encodeURIComponent(userName) + "&password=" + encodeURIComponent(password) + "&websiteName=" + encodeURIComponent(websiteName);
+    var finalUrl =
+      url +
+      "?username=" +
+      encodeURIComponent(userName) +
+      "&password=" +
+      encodeURIComponent(password) +
+      "&websiteName=" +
+      encodeURIComponent(websiteName);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', finalUrl);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.open("POST", finalUrl);
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
@@ -170,9 +194,11 @@ function jwtSignup(userName, password, websiteName){
           // Resolve the promise to indicate successful signup/login
           resolve(response);
         } else {
-          
           // Store the failure message in localStorage
-          localStorage.setItem("failureMessage", "Signup failed. Please check your credentials.");
+          localStorage.setItem(
+            "failureMessage",
+            "Signup failed. Please check your credentials."
+          );
 
           console.error(xhr.status);
 
@@ -183,20 +209,24 @@ function jwtSignup(userName, password, websiteName){
     };
     xhr.send();
   });
-
 }
-
 
 function jwtLogin(userName, password) {
   return new Promise((resolve, reject) => {
     websiteName = 0;
     url = setAPIUrl("JwtLogin");
-
-    var finalUrl = url + "?username=" + encodeURIComponent(userName) + "&password=" + encodeURIComponent(password) + "&websiteName=" + encodeURIComponent(websiteName);
+    var finalUrl =
+      url +
+      "?username=" +
+      encodeURIComponent(userName) +
+      "&password=" +
+      encodeURIComponent(password) +
+      "&websiteName=" +
+      encodeURIComponent(websiteName);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', finalUrl);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.open("GET", finalUrl);
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
@@ -209,9 +239,11 @@ function jwtLogin(userName, password) {
           // Resolve the promise to indicate successful login
           resolve(response);
         } else {
-          
           // Store the failure message in localStorage
-          localStorage.setItem("failureMessage", "Login failed. Please check your credentials.");
+          localStorage.setItem(
+            "failureMessage",
+            "Login failed. Please check your credentials."
+          );
 
           console.error(xhr.status);
 
@@ -229,32 +261,32 @@ function setLoggedInState(isLoggedIn) {
 }
 
 function logout() {
-  localStorage.removeItem("isLoggedIn")
+  localStorage.removeItem("isLoggedIn");
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 function isLoggedIn() {
   var loggedInStatus = localStorage.getItem("isLoggedIn");
-    
+
   if (loggedInStatus === "true") {
-      toggleElementVisibility("loadingContent");
-      toggleElementVisibility("pageContent");
-      return true; // User is logged in
+    toggleElementVisibility("loadingContent");
+    toggleElementVisibility("pageContent");
+    return true; // User is logged in
   } else {
-      // User is not logged in, redirect to the login page
-      window.location.href = "http://127.0.0.1:8080/Login"; 
-      return false;
+    // User is not logged in, redirect to the login page
+    window.location.href = "http://127.0.0.1:8080/Login";
+    return false;
   }
 }
 
 function toggleElementVisibility(elementId) {
   var element = document.getElementById(elementId);
   if (element) {
-      if (element.style.display === "none") {
-          element.style.display = "block"; // Show the element
-      } else {
-          element.style.display = "none"; // Hide the element
-      }
+    if (element.style.display === "none") {
+      element.style.display = "block"; // Show the element
+    } else {
+      element.style.display = "none"; // Hide the element
+    }
   }
 }
 
@@ -267,16 +299,15 @@ function saveTokenToCookie(token) {
   expiryDate.setHours(expiryDate.getHours() + 24);
 
   // Serialize and encode the token
-  const tokenValue = JSON.stringify(token);
-  const encodedToken = encodeURIComponent(tokenValue);
+  const tokenValue = JSON.stringify(encodeURIComponent(token));
 
   // Format the cookie string without "Bearer" prefix
-  const cookieValue = encodedToken + "; expires=" + expiryDate.toUTCString() + "; path=/";
+  const cookieValue =
+    tokenValue + "; expires=" + expiryDate.toUTCString() + "; path=/";
 
   // Set the cookie
   document.cookie = cookieName + "=" + cookieValue;
 }
-
 
 function setAPIUrl(action) {
   let baseUrl = "https://localhost:44311/api";
@@ -294,17 +325,17 @@ function setAPIUrl(action) {
       endpoint = "/admin/GetById";
       break;
     case "delete":
-        endpoint = "/admin/Delete";
-        break;
+      endpoint = "/admin/Delete";
+      break;
     case "update":
       endpoint = "/admin/Update";
       break;
     case "JwtLogin":
-        endpoint = "/auth/JwtLogin";
-        break;
+      endpoint = "/auth/JwtLogin";
+      break;
     case "JwtSignup":
-        endpoint = "/auth/AddSystemUser";
-        break;
+      endpoint = "/auth/AddSystemUser";
+      break;
     default:
       // Handle any other actions or set a default endpoint
       endpoint = "";
@@ -318,84 +349,81 @@ function setAPIUrl(action) {
 }
 
 function sendAuthorizedPostRequest(url, data, callback) {
-    // Get the token from the cookie
-    
-    const token = getCookieValue("token");
-      
-    const xhr = new XMLHttpRequest();
-      
-    // Set the Authorization header
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
-      
-    // Set the URL and method
-    xhr.open("POST", url);
-      
-    // Set the callback function to handle the response
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-        // Request was successful
-        callback(null, xhr.responseText);
-        } else {
-        // Request failed
-        callback(new Error("Request failed with status code " + xhr.status));
-        }
-    };
-      
-    // Set the request payload
-    xhr.setRequestHeader("Content-Type", "application/json");
-    const requestData = JSON.stringify(data);
-    xhr.send(requestData);
+  // Get the token from the cookie
+
+  const token = getCookieValue("token");
+
+  const xhr = new XMLHttpRequest();
+
+  // Set the Authorization header
+  xhr.setRequestHeader("Authorization", "Bearer " + token);
+
+  // Set the URL and method
+  xhr.open("POST", url);
+
+  // Set the callback function to handle the response
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Request was successful
+      callback(null, xhr.responseText);
+    } else {
+      // Request failed
+      callback(new Error("Request failed with status code " + xhr.status));
     }
-      
+  };
+
+  // Set the request payload
+  xhr.setRequestHeader("Content-Type", "application/json");
+  const requestData = JSON.stringify(data);
+  xhr.send(requestData);
+}
+
 function sendAuthorizedGetRequest(url, method, callback) {
-    const token = getCookieValue("token");
+  const token = getCookieValue("token");
 
+  const xhr = new XMLHttpRequest();
 
-    const xhr = new XMLHttpRequest();
-
-    if (isLoggedIn()) {
+  if (isLoggedIn()) {
     console.log("User is logged in");
     if (token) {
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
+      xhr.setRequestHeader("Authorization", "Bearer " + token);
     }
-    
-    xhr.open(method, url);
-    
-    xhr.onload = function () {
-    if (xhr.status === 200) {
-        callback(null, xhr.responseText);
-    } else {
-        callback('Error: ' + xhr.status);
-        }
-    };
-    
-    xhr.onerror = function () {
-    callback('Request failed');
-    };
-    
-    xhr.send();
 
-   } else {
-    callback('User not logged in');
-   }
+    xhr.open(method, url);
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        callback(null, xhr.responseText);
+      } else {
+        callback("Error: " + xhr.status);
+      }
+    };
+
+    xhr.onerror = function () {
+      callback("Request failed");
+    };
+
+    xhr.send();
+  } else {
+    callback("User not logged in");
+  }
 }
 
 function sendGetRequest(appName, category, projectName, containerId) {
-
   // Construct the URL with the additional filtering parameters
-  const baseUrl = 'https://localhost:44311/api/services/GetAll';
+  const baseUrl = "https://localhost:44311/api/services/GetAll";
   const apiUrl = new URL(baseUrl);
-  apiUrl.searchParams.append('appName', appName);
+  apiUrl.searchParams.append("appName", appName);
   if (category) {
-    apiUrl.searchParams.append('category', category);
+    apiUrl.searchParams.append("category", category);
   }
   if (projectName) {
-    apiUrl.searchParams.append('projectName', projectName);
+    apiUrl.searchParams.append("projectName", projectName);
   }
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', apiUrl.toString());
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("GET", apiUrl.toString());
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
@@ -410,7 +438,7 @@ function sendGetRequest(appName, category, projectName, containerId) {
         // Loop through the array of image URLs
         imageUrls.forEach(function (imageUrl) {
           // Create a new img element
-          var img = document.createElement('img');
+          var img = document.createElement("img");
 
           // Set the src attribute to the image URL
           img.src = imageUrl.url;
@@ -431,37 +459,39 @@ function sendGetRequest(appName, category, projectName, containerId) {
 
 function sendMessage() {
   // Get form input values
-  var name = document.getElementById('nameInput').value;
-  var email = document.getElementById('emailInput').value;
-  var message = document.getElementById('messageInput').value;
+  var name = document.getElementById("nameInput").value;
+  var email = document.getElementById("emailInput").value;
+  var message = document.getElementById("messageInput").value;
 
   // Create the email object
   var emailData = {
-      Name: name,
-      EmailAddress: email,
-      Message: message
+    Name: name,
+    EmailAddress: email,
+    Message: message,
   };
 
   // Make a POST request to your API endpoint
-  var apiUrl = 'https://localhost:44311/api/services/Add';
+  var apiUrl = "https://localhost:44311/api/services/Add";
   fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(emailData)
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(emailData),
   })
-  .then(function(response) {
+    .then(function (response) {
       if (response.ok) {
-          // Email sent successfully
-          alert('Email sent successfully!');
+        // Email sent successfully
+        alert("Email sent successfully!");
       } else {
-          // Failed to send email
-          alert('Failed to send email. Please try again later.');
+        // Failed to send email
+        alert("Failed to send email. Please try again later.");
       }
-  })
-  .catch(function(error) {
+    })
+    .catch(function (error) {
       // Error occurred during the API call
-      alert('An error occurred while sending the email. Please try again later.');
-  });
+      alert(
+        "An error occurred while sending the email. Please try again later."
+      );
+    });
 }
