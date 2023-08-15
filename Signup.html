@@ -83,6 +83,8 @@
         </div>
     </div>
     <!--   Core JS Files   -->
+    <script src="./assets/js/back-end-services.js"></script>
+    <script src="./assets/js/types.js"></script>
     <script>
         document.getElementById('signupForm').addEventListener('submit', function(event) {
           event.preventDefault();
@@ -96,31 +98,24 @@
           }
           // If passwords match, continue with signup process
           const email = document.getElementById('email').value;
+          console.log("email", email);
+          console.log("pass", password);
+
           // Call your signup function here
-          function saveTokenToCookie(token);
-          function jwtSignup(email, password, websiteName);
-    
-          document.getElementById('signupForm').addEventListener('submit', async (event) => {
-          event.preventDefault();
-    
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
-          const websiteName = 0; 
+          jwtSignup(email, password, WEBSITE_NAME);
     
           try {
-            const response = await jwtSignup(email, password, websiteName);
+            const response = jwtSignup(email, password, WEBSITE_NAME);
             console.log('Signup successful:', response);
             // Redirect or perform other actions upon successful signup
           } catch (error) {
             console.error('Signup error:', error);
             // Handle signup error, display a message, etc.
           }
-        });
           console.log("Signup successful for:", email);
           // Redirect or perform other actions upon successful signup
         });
     </script>
-    <script src="./assets/js/back-end-services.js"></script>
     <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
     <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>

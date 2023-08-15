@@ -1,7 +1,5 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +20,13 @@
 <body>
     <h1>Edit Image Details</h1>
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
+    <img src="" alt="Image" id="imageElement" style="max-width: 200px; margin-top: 30px; margin-bottom: 30px;">
+
+    <label for="imageName">Name:</label>
+    <input type="text" id="imageName" name="imageName" value="" required><br>
 
     <label for="uploadCategory">Upload Category:</label>
-    <select id="uploadCategory" name="uploadCategory" required>
+    <select id="uploadCategory" name="uploadCategory" value="" select="" required>
         <option value="BespokeCarpentry">Bespoke Carpentry</option>
         <option value="ConcreteTops">Concrete Tops</option>
         <option value="Furniture">Furniture</option>
@@ -41,44 +41,84 @@
         <option value="None">None</option>
     </select><br>
 
-    <button id="updateButton">Update Image</button>
-    <button id="returnToDetailsButton">Return to Details</button>
+    <button id="updateButton" onclick="UpdateDetails()">Update Image</button>
+    <button id="returnToDetailsButton" onclick="GoToDetails()">Return to Details</button>
 
     <!--   Core JS Files   -->
     <script src="./assets/js/back-end-services.js"></script>
+    <script src="./assets/js/types.js"></script>
     <script>
         isLoggedIn();
     </script>
     <script>
-        const websiteName = "CoatesCarpentry"; // Replace with the appropriate website name
-        const token = getCookieValue('token');
+        const imageElement = document.getElementById("imageElement");
+        const imageNameElement = document.getElementById("imageName");
+        const uploadCategoryElement = document.getElementById("uploadCategory");
+        const projectNameElement = document.getElementById("projectName");
 
-        // Add event listener to update button
-        document.getElementById('updateButton').addEventListener('click', async () => {
-            const name = document.getElementById('name').value;
-            const uploadCategory = document.getElementById('uploadCategory').value;
-            const projectName = document.getElementById('projectName').value;
+        populateDetails();
 
-            const updatedData = {
-                name: name,
-                uploadCategory: uploadCategory,
-                projectName: projectName
-            };
+        async function populateDetails()
+        {
+            const res = await getById(WEBSITE_NAME, getIdFromUrl());
 
-            try {
-                await updateMedia(websiteName, imageId, updatedData);
-                // Optionally, you can show a success message or perform other actions
-            } catch (error) {
-                console.error('Error updating image:', error);
-                // Optionally, you can show an error message or perform other actions
-            }
-        });
+            imageElement.src = res.url;
+            //imageNameElement.textContent = res.name;
+            //uploadCategoryElement.textContent = res.pictureCategory;
+            //projectNameElement.textContent = res.projectName;
 
-        // Add event listener to return button
-        document.getElementById('returnToDetailsButton').addEventListener('click', () => {
-            // Redirect back to image details page
-            window.location.href = 'Details.html'; // Replace with your actual details page URL
-        });
+            uploadCategoryElement.value = res.pictureCategory;
+            projectNameElement.value = res.projectName;
+            
+            imageNameElement.value = res.name;
+
+
+        }
+
+        function GoToDetails(){
+            var baseUrl = "http://127.0.0.1:8080/Details?Id="
+            var finalUrl = baseUrl + getIdFromUrl();
+            window.location.replace(finalUrl);
+        }
+
+        function UpdateDetails(){
+            var pictureCategory = document.getElementById("uploadCategory");
+            var projectName = document.getElementById("projectName");
+
+            var outProjectName = ProjectNameEnum(projectName.value);
+            var outUploadCategory = UploadCategoryEnum(pictureCategory.value);
+            var id = getIdFromUrl();
+            var websiteName = WEBSITE_NAME;
+
+            var name = document.getElementById("imageName").value;
+            console.log(id, name, websiteName, outUploadCategory, outProjectName)
+            
+            editImage(id, name, websiteName, outUploadCategory, outProjectName);
+            //GoToDetails();
+        }
+
+        function ProjectNameEnum(projectName){
+            if (projectName== "TregonwellRoad")
+                return 0;
+            if (projectName=="PonsfordRoad")
+                return 1;
+            if (projectName=="Summerhouse")
+                return 2;
+            if (projectName== "None")
+                return 3;
+        }
+
+        function UploadCategoryEnum(pictureCategory){
+            if (pictureCategory== "BespokeCarpentry")
+                return 0;
+            if (pictureCategory== "ConcreteTops")
+                return 1;
+            if (pictureCategory== "Furniture")
+                return 2;
+            if (pictureCategory== "None")
+                return 3;
+        }
+
     </script>
     <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -92,11 +132,5 @@
     <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
     <script src="./assets/js/paper-kit.js?v=2.2.0" type="text/javascript"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 </body>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
 </html>

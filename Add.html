@@ -17,6 +17,32 @@
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
 </head>
+<style>
+  .failedUpload {
+      border-top: 1px solid #999999;
+      /* position: fixed; */
+      z-index: 10000;
+      text-align: center;
+      bottom: -100px;
+      font-size: 18px;
+      background-color: #f75676;
+      display: none;
+      /* display: flex; */
+      justify-content: center;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      right: 0;
+      left: 0;
+      margin-right: auto;
+      margin-left: auto;
+      color: white;
+      padding-top: 10px;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      vertical-align: middle;
+      width: 50%;
+  }
+</style>
 
 <body>
     <div id="loadingContent"> Loading...</div>
@@ -109,8 +135,11 @@
       
             </div>
             <div>
-                <a href="/Details.html">Back to List</a>
+                <a href="/Images.html">Back to List</a>
               </div>
+
+              <div class="alert alert-danger failedUpload" id="messagebox" role="alert" style="display: none;"></div>
+
 
     <script>
       // Your JavaScript function 'addImage()' goes here.
@@ -132,8 +161,23 @@
         } catch (error) {
           console.error('Error:', error);
           // Optionally, you can show an error message or perform any other action if there's an error.
+          // Store the failure message in localStorage
+          localStorage.setItem("failureMessage", "Upload failed. Please check your credentials.");
+
+          // Display the failure message
+          const messagebox = document.getElementById("messagebox");
+          messagebox.innerText = "Upload failed.";
+          messagebox.style.display = "block";
+
+          // Call the fadeMyDiv function after 3 seconds
+          setTimeout(fadeMyDiv, 3000);
         }
+
       });
+      function fadeMyDiv() {
+        $("#messagebox").fadeOut('slow');
+        localStorage.removeItem("failureMessage");
+    }
     </script>
 
     <!--   Core JS Files   -->

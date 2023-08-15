@@ -22,44 +22,71 @@
     <h1>Delete Image</h1>
 
     <p>Are you sure you want to delete the following image?</p>
-    <img src="" alt="Image">
+    <img src="" alt="Image" id="imageElement" style="max-width: 200px; margin-top: 30px; margin-bottom: 30px;">
+
     <p><strong>Name:</strong> <span id="imageName"></span></p>
     <p><strong>Upload Category:</strong> <span id="uploadCategory"></span></p>
     <p><strong>Project Name:</strong> <span id="projectName"></span></p>
 
-    <button id="deleteButton">Delete</button>
-    <button id="returnToDetailsButton">Return to Details</button>
+    <button id="deleteButton" onclick="deleteMedia()">Delete</button>
+    <button id="returnToDetailsButton" onclick="GoToDetails()">Return to Details</button>
 
 
     <!--   Core JS Files   -->
-    <script>
-        const imageName = "Image Name";
-        const uploadCategory = "Upload Category";
-        const projectName = "Project Name";
-        const imageUrl = "Image URL"; // Replace with the actual image URL
-
-        // Set image details
-        document.getElementById('imageName').textContent = imageName;
-        document.getElementById('uploadCategory').textContent = uploadCategory;
-        document.getElementById('projectName').textContent = projectName;
-
-        // Set image source
-        const imageElement = document.querySelector('img');
-        imageElement.src = imageUrl;
-
-        // Add event listeners to buttons
-        document.getElementById('deleteButton').addEventListener('click', () => {
-            deleteMedia("CoatesCarpentry", id);
-        });
-
-        document.getElementById('returnToDetailsButton').addEventListener('click', () => {
-            // Redirect to details page
-            window.location.href = 'Images.html';
-        });
-    </script>
     <script src="./assets/js/back-end-services.js"></script>
+    <script src="./assets/js/types.js"></script>
     <script>
         isLoggedIn();
+    </script>
+    <script>
+        const imageElement = document.getElementById("imageElement");
+        const imageNameElement = document.getElementById("imageName");
+        const uploadCategoryElement = document.getElementById("uploadCategory");
+        const projectNameElement = document.getElementById("projectName");
+
+        populateDetails();
+
+        function deleteMedia(){
+            deleteImage(WEBSITE_NAME, getIdFromUrl());
+        }
+
+        function GoToDetails(){
+            var baseUrl = "http://127.0.0.1:8080/Details?Id="
+            var finalUrl = baseUrl + getIdFromUrl();
+            window.location.replace(finalUrl);
+        }
+
+        async function populateDetails()
+        {
+            const res = await getById(WEBSITE_NAME, getIdFromUrl());
+            imageElement.src = res.url;
+            imageNameElement.textContent = res.name;
+            uploadCategoryElement.textContent = await UploadCategoryEnum(res.pictureCategory);
+            projectNameElement.textContent = await ProjectNameEnum(res.projectName);
+        }
+
+        function UploadCategoryEnum(pictureCategory){
+            if (pictureCategory==0)
+                return "Bespoke Carpentry";
+            if (pictureCategory==1)
+                return "Concrete Tops";
+            if (pictureCategory==2)
+                return "Furniture";
+            if (pictureCategory==3)
+                return "None";
+        }
+
+        function ProjectNameEnum(projectName){
+            if (projectName==0)
+                return "Tregonwell Road";
+            if (projectName==1)
+                return "Ponsford Road";
+            if (projectName==2)
+                return "Summerhouse";
+            if (projectName==3)
+                return "None";
+        }
+ 
     </script>
     <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>

@@ -20,68 +20,73 @@
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
 </head>
 <body>
-    <h1>Image Details</h1>
+    <h3>Image Details</h3>
 
-    <img src="" alt="Image">
+    <img src="" alt="Image" id="imageElement" style="max-width: 200px; margin-top: 30px; margin-bottom: 30px;">
 
     <p><strong>Name:</strong> <span id="imageName"></span></p>
     <p><strong>Upload Category:</strong> <span id="uploadCategory"></span></p>
     <p><strong>Project Name:</strong> <span id="projectName"></span></p>
 
-    <button id="editButton">Edit</button>
-    <button id="deleteButton">Delete</button>
-    <button id="returnToListButton">Return to List</button>
+    <button id="editButton" onclick="GoToEdit()">Edit</button>
+    <button id="deleteButton" onclick="GoToDelete()">Delete</button>
+    <button id="returnToListButton" onclick="returnToList()">Return to List</button>
 
-    
-    <!--   Core JS Files   -->
-    <script>
-        const imageName = "Image Name";
-        const uploadCategory = "Upload Category";
-        const projectName = "Project Name";
-        const imageUrl = "Image URL"; // Replace with the actual image URL
-
-        // Set image details
-        document.getElementById('imageName').textContent = imageName;
-        document.getElementById('uploadCategory').textContent = uploadCategory;
-        document.getElementById('projectName').textContent = projectName;
-
-        // Set image source
-        const imageElement = document.querySelector('img');
-        imageElement.src = imageUrl;
-
-        // Add event listeners to buttons
-        document.getElementById('editButton').addEventListener('click', () => {
-            // Redirect to edit page using image ID
-            window.location.href = 'Edit.html?websiteName=CoatesCarpentry&id=' + imageId;
-        });
-
-        document.getElementById('deleteButton').addEventListener('click', () => {
-            // Redirect to delete page using image ID
-            window.location.href = 'Delete.html?websiteName=CoatesCarpentry&id=' + imageId;
-        });
-
-        document.getElementById('returnToListButton').addEventListener('click', () => {
-            // Redirect to list page
-            window.location.href = 'Images.html';
-        });
-    </script>
     <script src="./assets/js/back-end-services.js"></script>
+    <script src="./assets/js/types.js"></script>
     <script>
-        isLoggedIn();
+        const imageElement = document.getElementById("imageElement");
+        const imageNameElement = document.getElementById("imageName");
+        const uploadCategoryElement = document.getElementById("uploadCategory");
+        const projectNameElement = document.getElementById("projectName");
+
+        populateDetails();
+
+        function returnToList(){
+            window.location.replace("http://127.0.0.1:8080/Images");
+        }
+
+        function GoToDelete(){
+            var baseUrl = "http://127.0.0.1:8080/Delete?Id="
+            var finalUrl = baseUrl + getIdFromUrl();
+            window.location.replace(finalUrl);
+        }
+
+        function GoToEdit(){
+            var baseUrl = "http://127.0.0.1:8080/Edit?Id="
+            var finalUrl = baseUrl + getIdFromUrl();
+            window.location.replace(finalUrl);
+        }
+
+        async function populateDetails()
+        {
+            const res = await getById(WEBSITE_NAME, getIdFromUrl());
+            imageElement.src = res.url;
+            imageNameElement.textContent = res.name;
+            uploadCategoryElement.textContent = await UploadCategoryEnum(res.pictureCategory);
+            projectNameElement.textContent = await ProjectNameEnum(res.projectName);
+        }
+
+        function UploadCategoryEnum(pictureCategory){
+            if (pictureCategory==0)
+                return "Bespoke Carpentry";
+            if (pictureCategory==1)
+                return "Concrete Tops";
+            if (pictureCategory==2)
+                return "Furniture";
+            if (pictureCategory==3)
+                return "None";
+        }
+
+        function ProjectNameEnum(projectName){
+            if (projectName==0)
+                return "Tregonwell Road";
+            if (projectName==1)
+                return "Ponsford Road";
+            if (projectName==2)
+                return "Summerhouse";
+            if (projectName==3)
+                return "None";
+        }
     </script>
-    <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
-    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="./assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-    <script src="./assets/js/plugins/moment.min.js"></script>
-    <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
-    <script src="./assets/js/paper-kit.js?v=2.2.0" type="text/javascript"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 </body>
-</html>

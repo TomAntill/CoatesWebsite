@@ -68,50 +68,45 @@ function deleteMedia(websiteName, id) {
   xhr.send();
 }
 
-function getById(websiteName, id) {
-  const token = getCookieValue("token");
-
-  const baseUrl = setAPIUrl("getById");
-  var finalUrl =
-    baseUrl +
-    "?websiteName=" +
-    encodeURIComponent(websiteName) +
-    "&id=" +
-    encodeURIComponent(id);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", finalUrl);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader("Authorization", "Bearer " + token);
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        const image = JSON.parse(xhr.responseText);
-
-        if (image) {
-          // Handle the image details
-          const imageName = image.Name;
-          const uploadCategory = image.PictureCategory;
-          const projectName = image.ProjectName;
-          const imageUrl = image.Url; // Assuming this is the URL to the image file
-
-          console.log("Image Name:", imageName);
-          console.log("Upload Category:", uploadCategory);
-          console.log("Project Name:", projectName);
-          console.log("Image URL:", imageUrl);
-        } else {
-          console.error("Image not found.");
-        }
-      } else {
-        // Handle errors
-        console.error(xhr.status);
-      }
-    }
-  };
-
-  xhr.send();
+function getIdFromUrl()
+{
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('Id');
+  return id;
 }
+
+function getById(websiteName, id) {
+  return new Promise((resolve, reject) => {
+    const token = getCookieValue("token");
+
+    const baseUrl = setAPIUrl("getById");
+    var finalUrl =
+      baseUrl +
+      "?websiteName=" +
+      encodeURIComponent(websiteName) +
+      "&id=" +
+      encodeURIComponent(id);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", finalUrl);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const image = JSON.parse(xhr.responseText);
+          resolve(image); // Resolve the promise with the image object
+        } else {
+          // Handle errors
+          reject(xhr.status); // Reject the promise with the error status
+        }
+      }
+    };
+    xhr.send();
+  });
+}
+
 
 function getCookieValue(cookieName) {
   const name = cookieName + "=";
@@ -136,6 +131,79 @@ function getCookieValue(cookieName) {
   return null; // Return null if the cookie is not found
 }
 
+async function deleteImage(websiteName, id) {
+  const token = getCookieValue("token");
+  const url = setAPIUrl("delete");
+  var finalUrl =
+  url +
+  "?websiteName=" +
+  encodeURIComponent(websiteName) +
+  "&id=" +
+  encodeURIComponent(id);
+
+  console.log(finalUrl);
+  const xhr = new XMLHttpRequest();
+
+  // Set the URL and method
+  xhr.open("DELETE", finalUrl);
+
+  // Set the callback function to handle the response
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Request was successful
+      console.log("Image delete successful!");
+      window.location.replace("http://127.0.0.1:8080/Images");
+    } else {
+      // Request failed
+      console.error("Image delete failed with status code " + xhr.status);
+    }
+  };
+
+  // Set the Authorization header
+  xhr.setRequestHeader("Authorization", "Bearer " + token);
+
+  xhr.send();
+}
+
+async function editImage(id, name, websiteName, uploadCategory, projectName) {
+  const token = getCookieValue("token");
+  const url = setAPIUrl("update");
+
+  const xhr = new XMLHttpRequest();
+
+  // Set the URL and method
+  xhr.open("POST", url);
+
+  // Set the callback function to handle the response
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Request was successful
+      console.log("Image updated successful!");
+    } else {
+      // Request failed
+      console.error("Image upload failed with status code " + xhr.status);
+    }
+  };
+
+  // Set the Authorization header
+  xhr.setRequestHeader("Authorization", "Bearer " + token);
+
+  // Set the Content-Type header to indicate JSON data
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  const jsonData = JSON.stringify({
+    id: id,
+    name: name,
+    websiteName: websiteName,
+    uploadCategory: uploadCategory,
+    projectName: projectName
+  });
+
+  console.log("json", jsonData);
+
+  xhr.send(jsonData);
+}
+
 async function addImage(name, file, websiteName, uploadCategory, projectName) {
   const token = getCookieValue("token");
   const url = setAPIUrl("addImage");
@@ -150,6 +218,7 @@ async function addImage(name, file, websiteName, uploadCategory, projectName) {
     if (xhr.status === 200) {
       // Request was successful
       console.log("Image upload successful!");
+      window.location.replace("http://127.0.0.1:8080/Add");
     } else {
       // Request failed
       console.error("Image upload failed with status code " + xhr.status);
@@ -409,52 +478,34 @@ function sendAuthorizedGetRequest(url, method, callback) {
   }
 }
 
-function sendGetRequest(appName, category, projectName, containerId) {
-  // Construct the URL with the additional filtering parameters
-  const baseUrl = "https://localhost:44311/api/services/GetAll";
-  const apiUrl = new URL(baseUrl);
-  apiUrl.searchParams.append("appName", appName);
-  if (category) {
-    apiUrl.searchParams.append("category", category);
-  }
-  if (projectName) {
-    apiUrl.searchParams.append("projectName", projectName);
-  }
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", apiUrl.toString());
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        // Handle the response data
-
-        var imageUrls = response; // Assuming the response is a JSON array of image URLs
-
-        // Get the container element where you want to append the images
-        var container = document.getElementById(containerId);
-
-        // Loop through the array of image URLs
-        imageUrls.forEach(function (imageUrl) {
-          // Create a new img element
-          var img = document.createElement("img");
-
-          // Set the src attribute to the image URL
-          img.src = imageUrl.url;
-
-          // Append the img element to the container
-          container.appendChild(img);
-        });
-
-        console.log(response);
-      } else {
-        // Handle errors
-        console.error(xhr.status);
-      }
+function sendGetRequest(appName, category, projectName) {
+  return new Promise((resolve, reject) => {
+    // Construct the URL with the additional filtering parameters
+    const baseUrl = "https://localhost:44311/api/services/GetAll";
+    const apiUrl = new URL(baseUrl);
+    apiUrl.searchParams.append("appName", appName);
+    if (category) {
+      apiUrl.searchParams.append("category", category);
     }
-  };
-  xhr.send();
+    if (projectName) {
+      apiUrl.searchParams.append("projectName", projectName);
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", apiUrl.toString());
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          resolve(response); // Resolve the promise with the array of image URLs
+        } else {
+          reject(new Error(`Request failed with status: ${xhr.status}`));
+        }
+      }
+    };
+    xhr.send();
+  });
 }
 
 function sendMessage() {
