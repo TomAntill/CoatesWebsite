@@ -16,6 +16,8 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
+    <script  type="module" src="./assets/js/html-edit.js"></script>
+    <script src="./assets/js/types.js"></script>
 </head>
 <body>
     <h1>Edit Image Details</h1>
@@ -41,84 +43,12 @@
         <option value="None">None</option>
     </select><br>
 
-    <button id="updateButton" onclick="UpdateDetails()">Update Image</button>
-    <button id="returnToDetailsButton" onclick="GoToDetails()">Return to Details</button>
+    <button id="updateButton">Update Image</button>
+    <button id="returnToDetailsButton">Return to Details</button>
 
     <!--   Core JS Files   -->
-    <script src="./assets/js/back-end-services.js"></script>
-    <script src="./assets/js/types.js"></script>
     <script>
-        isLoggedIn();
-    </script>
-    <script>
-        const imageElement = document.getElementById("imageElement");
-        const imageNameElement = document.getElementById("imageName");
-        const uploadCategoryElement = document.getElementById("uploadCategory");
-        const projectNameElement = document.getElementById("projectName");
-
-        populateDetails();
-
-        async function populateDetails()
-        {
-            const res = await getById(WEBSITE_NAME, getIdFromUrl());
-
-            imageElement.src = res.url;
-            //imageNameElement.textContent = res.name;
-            //uploadCategoryElement.textContent = res.pictureCategory;
-            //projectNameElement.textContent = res.projectName;
-
-            uploadCategoryElement.value = res.pictureCategory;
-            projectNameElement.value = res.projectName;
-            
-            imageNameElement.value = res.name;
-
-
-        }
-
-        function GoToDetails(){
-            var baseUrl = "http://127.0.0.1:8080/Details?Id="
-            var finalUrl = baseUrl + getIdFromUrl();
-            window.location.replace(finalUrl);
-        }
-
-        function UpdateDetails(){
-            var pictureCategory = document.getElementById("uploadCategory");
-            var projectName = document.getElementById("projectName");
-
-            var outProjectName = ProjectNameEnum(projectName.value);
-            var outUploadCategory = UploadCategoryEnum(pictureCategory.value);
-            var id = getIdFromUrl();
-            var websiteName = WEBSITE_NAME;
-
-            var name = document.getElementById("imageName").value;
-            console.log(id, name, websiteName, outUploadCategory, outProjectName)
-            
-            editImage(id, name, websiteName, outUploadCategory, outProjectName);
-            //GoToDetails();
-        }
-
-        function ProjectNameEnum(projectName){
-            if (projectName== "TregonwellRoad")
-                return 0;
-            if (projectName=="PonsfordRoad")
-                return 1;
-            if (projectName=="Summerhouse")
-                return 2;
-            if (projectName== "None")
-                return 3;
-        }
-
-        function UploadCategoryEnum(pictureCategory){
-            if (pictureCategory== "BespokeCarpentry")
-                return 0;
-            if (pictureCategory== "ConcreteTops")
-                return 1;
-            if (pictureCategory== "Furniture")
-                return 2;
-            if (pictureCategory== "None")
-                return 3;
-        }
-
+        
     </script>
     <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>

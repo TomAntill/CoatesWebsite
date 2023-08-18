@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img//apple-icon.png">
@@ -17,8 +16,19 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
+    <script  type="module" src="./assets/js/html-images.js"></script>
+    <script src="./assets/js/types.js"></script>
 </head>
 <body>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" title="Manage" href="/Pictures?area=Identity&amp;page=%2FAccount%2FManage%2FIndex">Hello thomasantill92@gmail.com!</a>
+        </li>
+        <li class="nav-item">
+            <a style="font-weight: 500; color: #584f4a;" onclick="logout()"> Logout</a>
+        </li>
+    </ul>
+
     <h1 style="margin-left:8px">Admin</h1>
     <br />
     <p>
@@ -39,61 +49,12 @@
         </tbody>
       </table>
     <!--   Core JS Files   -->
-    <script src="./assets/js/back-end-services.js"></script>
-    <script src="./assets/js/types.js"></script>
+
     <script>
-        isLoggedIn();
+        //isLoggedIn();
     </script>
     <script>
-        const tbody = document.querySelector('tbody');
-        
-        sendGetRequest('0', undefined, undefined)
-            .then(images => {
-                images.forEach(image => {
-                    image.projectName = ProjectNameEnum(image.projectName);
-                    image.pictureCategory = UploadCategoryEnum(image.pictureCategory);
-                    console.log(image.id);
-                    const row = document.createElement('tr'); // Create a new row for each image
-                    row.innerHTML = `
-                        <td><img src="${image.url}" alt="Image" id="imageElement" style="max-width: 200px; margin-top: 30px; margin-bottom: 30px;">
-                        <td>${image.name}</td>
-                        <td>${image.pictureCategory}</td>
-                        <td>${image.projectName}</td>
-                        <td>
-                            <a href="http://127.0.0.1:8080/Edit?Id=${image.id}">Edit</a> |
-                            <a href="http://127.0.0.1:8080/Details?Id=${image.id}">Details</a> |
-                            <a href="http://127.0.0.1:8080/Delete?Id=${image.id}">Delete</a> |
-                        </td>
-                        `;
-                        tbody.appendChild(row); // Append the row to the table body
-                    });
-                })
-            .catch(error => {
-            // Handle errors
-            console.error(error);
-        });
 
-        function UploadCategoryEnum(pictureCategory){
-            if (pictureCategory==0)
-                return "Bespoke Carpentry";
-            if (pictureCategory==1)
-                return "Concrete Tops";
-            if (pictureCategory==2)
-                return "Furniture";
-            if (pictureCategory==3)
-                return "None";
-        }
-
-        function ProjectNameEnum(projectName){
-            if (projectName==0)
-                return "Tregonwell Road";
-            if (projectName==1)
-                return "Ponsford Road";
-            if (projectName==2)
-                return "Summerhouse";
-            if (projectName==3)
-                return "None";
-        }
 </script>
     <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>

@@ -17,6 +17,8 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
+    <script  type="module" src="./assets/js/html-delete.js"></script>
+    <script src="./assets/js/types.js"></script>
 </head>
 <body>
     <h1>Delete Image</h1>
@@ -28,64 +30,13 @@
     <p><strong>Upload Category:</strong> <span id="uploadCategory"></span></p>
     <p><strong>Project Name:</strong> <span id="projectName"></span></p>
 
-    <button id="deleteButton" onclick="deleteMedia()">Delete</button>
-    <button id="returnToDetailsButton" onclick="GoToDetails()">Return to Details</button>
+    <button id="deleteButton">Delete</button>
+    <button id="returnToDetailsButton">Return to Details</button>
 
 
     <!--   Core JS Files   -->
-    <script src="./assets/js/back-end-services.js"></script>
-    <script src="./assets/js/types.js"></script>
     <script>
-        isLoggedIn();
-    </script>
-    <script>
-        const imageElement = document.getElementById("imageElement");
-        const imageNameElement = document.getElementById("imageName");
-        const uploadCategoryElement = document.getElementById("uploadCategory");
-        const projectNameElement = document.getElementById("projectName");
 
-        populateDetails();
-
-        function deleteMedia(){
-            deleteImage(WEBSITE_NAME, getIdFromUrl());
-        }
-
-        function GoToDetails(){
-            var baseUrl = "http://127.0.0.1:8080/Details?Id="
-            var finalUrl = baseUrl + getIdFromUrl();
-            window.location.replace(finalUrl);
-        }
-
-        async function populateDetails()
-        {
-            const res = await getById(WEBSITE_NAME, getIdFromUrl());
-            imageElement.src = res.url;
-            imageNameElement.textContent = res.name;
-            uploadCategoryElement.textContent = await UploadCategoryEnum(res.pictureCategory);
-            projectNameElement.textContent = await ProjectNameEnum(res.projectName);
-        }
-
-        function UploadCategoryEnum(pictureCategory){
-            if (pictureCategory==0)
-                return "Bespoke Carpentry";
-            if (pictureCategory==1)
-                return "Concrete Tops";
-            if (pictureCategory==2)
-                return "Furniture";
-            if (pictureCategory==3)
-                return "None";
-        }
-
-        function ProjectNameEnum(projectName){
-            if (projectName==0)
-                return "Tregonwell Road";
-            if (projectName==1)
-                return "Ponsford Road";
-            if (projectName==2)
-                return "Summerhouse";
-            if (projectName==3)
-                return "None";
-        }
  
     </script>
     <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>

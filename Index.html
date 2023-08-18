@@ -20,6 +20,10 @@
     <link href="./assets/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <link href="./assets/css/gallery.css" rel="stylesheet" />
     <link href="./assets/css/glightbox.css" rel="stylesheet" />
+
+    <script  type="module" src="./assets/js/html-index.js"></script>
+    <script src="./assets/js/types.js"></script>
+
     <style>
         .galleryImageWrapper {
             position: relative;
@@ -467,7 +471,7 @@
                             <textarea id="messageInput" class="form-control" rows="4" placeholder="Message..."></textarea>
                             <div class="row">
                                 <div class="col-md-4 ml-auto mr-auto" style="text-align: center !important">
-                                    <button type="button" class="btn btn-danger btn-lg btn-fill" onclick="sendMessage()">Send Message</button>
+                                    <button id="sendEmail" type="button" class="btn btn-danger btn-lg btn-fill">Send Message</button>
                                 </div>
                             </div>
                         </form>
@@ -526,62 +530,11 @@
 <script src="./assets/aos/aos.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Get the container element where you want to append the images
-      var container = document.getElementById('YourContainerId1');
-      // Call the function to fetch images and append them to the container
-      sendGetRequest('0', '1', undefined, 'YourContainerId1');
-    });
+    
   </script>
 
 <script>
-    popup = {
-        init: function () {
-            $('figure').click(function () {
-                popup.open($(this));
-            });
 
-            $(document).on('click', '.popup img', function () {
-                return false;
-            }).on('click', '.popup', function () {
-                popup.close();
-            })
-        },
-        open: function ($figure) {
-            $('.gallery').addClass('pop');
-            $popup = $('<div class="popup" />').appendTo($('body'));
-            $fig = $figure.clone().appendTo($('.popup'));
-            $bg = $('<div class="bg" />').appendTo($('.popup'));
-            $close = $('<div class="close"><svg><use xlink:href="#close"></use></svg></div>').appendTo($fig);
-            $shadow = $('<div class="shadow" />').appendTo($fig);
-            src = $('img', $fig).attr('src');
-            $shadow.css({ backgroundImage: 'url(' + src + ')' });
-            $bg.css({ backgroundImage: 'url(' + src + ')' });
-            setTimeout(function () {
-                $('.popup').addClass('pop');
-            }, 10);
-        },
-        close: function () {
-            $('.gallery, .popup').removeClass('pop');
-            setTimeout(function () {
-                $('.popup').remove()
-            }, 100);
-        }
-    }
-
-    popup.init()
-
-    window.onscroll = function () { didtheyscroll() };
-
-    function didtheyscroll() {
-        if ($(document).scrollTop() > 50) {
-            $('.img-overridable-bg-hdnle').removeClass('img-overridable-bg');
-        }
-
-        if ($(document).scrollTop() < 50) {
-            $('.img-overridable-bg-hdnle').addClass('img-overridable-bg');
-        }
-    }
 
 </script>
 

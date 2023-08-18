@@ -17,6 +17,8 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
+    <script  type="module" src="./assets/js/html-signup.js"></script>
+    <script src="./assets/js/types.js"></script>
     <style>
         .failedLogin {
             border-top: 1px solid #999999;
@@ -83,38 +85,8 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="./assets/js/back-end-services.js"></script>
-    <script src="./assets/js/types.js"></script>
     <script>
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-    
-          const password = document.getElementById('password').value;
-          const confirmPassword = document.getElementById('confirmPassword').value;
-    
-          if (password !== confirmPassword) {
-            alert("Passwords do not match. Please confirm your password.");
-            return;
-          }
-          // If passwords match, continue with signup process
-          const email = document.getElementById('email').value;
-          console.log("email", email);
-          console.log("pass", password);
-
-          // Call your signup function here
-          jwtSignup(email, password, WEBSITE_NAME);
-    
-          try {
-            const response = jwtSignup(email, password, WEBSITE_NAME);
-            console.log('Signup successful:', response);
-            // Redirect or perform other actions upon successful signup
-          } catch (error) {
-            console.error('Signup error:', error);
-            // Handle signup error, display a message, etc.
-          }
-          console.log("Signup successful for:", email);
-          // Redirect or perform other actions upon successful signup
-        });
+        
     </script>
     <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
