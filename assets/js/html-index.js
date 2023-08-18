@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var sendEmail = document.getElementById("sendEmail");
   sendEmail.addEventListener("click", BackendServices.email.sendMessage);
 
-
-  popup = {
+  var popup = {
     init: function () {
         $('figure').click(function () {
             popup.open($(this));
