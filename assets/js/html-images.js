@@ -50,3 +50,6 @@ function ProjectNameEnum(projectName){
     if (projectName==3)
         return "None";
 }
+
+var logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", BackendServices.user.logout);

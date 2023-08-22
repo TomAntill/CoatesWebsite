@@ -56,3 +56,5 @@ returnToDetailsButton.addEventListener("click", GoToDetails);
 var deleteButton = document.getElementById("deleteButton");
 deleteButton.addEventListener("click", deleteMedia);
 
+var logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", BackendServices.user.logout);

@@ -74,3 +74,6 @@ updateButton.addEventListener("click", UpdateDetails);
 
 var returnToDetailsButton = document.getElementById("returnToDetailsButton");
 returnToDetailsButton.addEventListener("click", GoToDetails);
+
+var logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", BackendServices.user.logout);

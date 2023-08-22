@@ -64,3 +64,6 @@ returnToListButton.addEventListener("click", returnToList);
 
 var deleteButton = document.getElementById("deleteButton");
 deleteButton.addEventListener("click", GoToDelete);
+
+var logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", BackendServices.user.logout);

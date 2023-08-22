@@ -95,6 +95,7 @@ export function setLoggedInState(isLoggedIn) {
 
 export function logout() {
   localStorage.removeItem("isLoggedIn");
+  console.log("logout");
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location.href = "http://127.0.0.1:8080/Login";
 }

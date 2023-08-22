@@ -37,3 +37,6 @@ async function addImage(name, file, websiteName, uploadCategory, projectName) {
     $("#messagebox").fadeOut('slow');
     localStorage.removeItem("failureMessage");
 }
+
+var logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", BackendServices.user.logout);
