@@ -7,13 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     BackendServices.get.sendGetRequest('0', '1', undefined, 'YourContainerId1');
   });
 
-
-
-
-
-
-
-
   var sendEmail = document.getElementById("sendEmail");
   sendEmail.addEventListener("click", BackendServices.email.sendMessage);
 

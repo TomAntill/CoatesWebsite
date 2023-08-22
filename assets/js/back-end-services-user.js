@@ -102,13 +102,43 @@ export function logout() {
 
 export function isLoggedIn() {
   
-    var expirationDateString = document.cookie;
-    console.log(expirationDateString);
-    var expirationDate = new Date(expirationDateString);
-    console.log(expirationDate);
+    var cookieValue = document.cookie;
+    const pageContentDiv = document.getElementById('pageContent');
+    const pageLoadingDiv = document.getElementById('loadingContent');
 
+    if (cookieValue.length === 0){
+      console.log("No token.");
+      localStorage.removeItem("isLoggedIn");
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
+      window.location.href = "http://127.0.0.1:8080/Login";
+    }
+    else
+    {
+      const jwtParts = cookieValue.split('.');
+      const encodedPayload = jwtParts[1];
+      const decodedPayload = atob(encodedPayload); // Decoding base64
 
+      const payloadObject = JSON.parse(decodedPayload);
+
+      //const expDate = new Date(payloadObject.exp * 1000);
+      //console.log("exp Date:", expDate);
+
+      const currentTimestamp = Math.floor(Date.now() / 1000); // Get current timestamp in seconds
+
+      if (currentTimestamp < payloadObject.exp) {
+        console.log("Token is still valid.");
+        pageContentDiv.style.display = 'block'; // Show the content
+        pageLoadingDiv.style.display = 'none'; // Hide the content
+        
+      } else {
+        console.log("Token has expired.");
+        localStorage.removeItem("isLoggedIn");
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        window.location.href = "http://127.0.0.1:8080/Login";
+      }
+    }
   } 
 
 
@@ -120,6 +150,7 @@ export function isLoggedIn() {
   // Set the expiry date for the cookie
   const expiryDate = new Date();
   expiryDate.setHours(expiryDate.getHours() + 24);
+  console.log("token date", expiryDate);
 
   // Serialize and encode the token
   const tokenValue = JSON.stringify(encodeURIComponent(token));
@@ -127,6 +158,7 @@ export function isLoggedIn() {
   // Format the cookie string without "Bearer" prefix
   const cookieValue =
     tokenValue + "; expires=" + expiryDate.toUTCString() + "; path=/";
+    console.log("token value", cookieValue);
 
   // Set the cookie
   document.cookie = cookieName + "=" + cookieValue;
