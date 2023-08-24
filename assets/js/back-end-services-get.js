@@ -32,43 +32,12 @@ export function getById(websiteName, id) {
   });
 }
 
-export function sendAuthorizedGetRequest(url, method, callback) {
-    const token = BackendServicesHelpers.getCookieValue("token");
-  
-    const xhr = new XMLHttpRequest();
-  
-    if (isLoggedIn()) {
-      console.log("User is logged in");
-      if (token) {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      }
-  
-      xhr.open(method, url);
-  
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          callback(null, xhr.responseText);
-        } else {
-          callback("Error: " + xhr.status);
-        }
-      };
-  
-      xhr.onerror = function () {
-        callback("Request failed");
-      };
-  
-      xhr.send();
-    } else {
-      callback("User not logged in");
-    }
-  }
-  
-  export function sendGetRequest(appName, category, projectName) {
+  export function sendGetRequest(websiteName, category, projectName) {
     return new Promise((resolve, reject) => {
       // Construct the URL with the additional filtering parameters
       const baseUrl = "https://localhost:44311/api/services/GetAll";
       const apiUrl = new URL(baseUrl);
-      apiUrl.searchParams.append("appName", appName);
+      apiUrl.searchParams.append("appName", websiteName);
       if (category) {
         apiUrl.searchParams.append("category", category);
       }

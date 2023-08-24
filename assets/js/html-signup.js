@@ -15,17 +15,13 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     console.log("email", email);
     console.log("pass", password);
 
-    // Call your signup function here
     BackendServices.user.jwtSignup(email, password, WEBSITE_NAME);
 
     try {
       const response = BackendServices.user.jwtSignup(email, password, WEBSITE_NAME);
       console.log('Signup successful:', response);
-      // Redirect or perform other actions upon successful signup
     } catch (error) {
       console.error('Signup error:', error);
-      // Handle signup error, display a message, etc.
     }
     console.log("Signup successful for:", email);
-    // Redirect or perform other actions upon successful signup
   });

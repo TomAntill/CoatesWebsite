@@ -1,34 +1,4 @@
 import * as BackendServicesHelpers from './back-end-services-helpers.js';
- 
-
-export function deleteMedia(websiteName, id) {
-    const token = BackendServicesHelpers.getCookieValue("token");
-  
-    const baseUrl = BackendServicesHelpers.setAPIUrl("delete");
-    var finalUrl =
-      baseUrl +
-      "?websiteName=" +
-      encodeURIComponent(websiteName) +
-      "&id=" +
-      encodeURIComponent(id);
-  
-    const xhr = new XMLHttpRequest();
-    xhr.open("DELETE", finalUrl);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
-  
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 204) {
-          console.log("Media deleted successfully.");
-        } else {
-          console.error("Failed to delete media. Status:", xhr.status);
-        }
-      }
-    };
-  
-    xhr.send();
-  }
   
   export async function deleteImage(websiteName, id) {
     const token = BackendServicesHelpers.getCookieValue("token");

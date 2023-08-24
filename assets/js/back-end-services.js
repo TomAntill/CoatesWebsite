@@ -1,9 +1,3 @@
-//import { deleteImage, deleteMedia } from './back-end-services-delete';
-//import { sendMessage } from './back-end-services-email';
-//import { getById, sendAuthorizedGetRequest, sendGetRequest } from './back-end-services-get';
-//import { toggleElementVisibility, setAPIUrl, getCookieValue, getIdFromUrl } from './back-end-services-helpers';
-//import { updateMedia, editImage, addImage, sendAuthorizedPostRequest } from './back-end-services-post';
-//import { jwtSignup, jwtLogin, setLoggedInState, logout, isLoggedIn, saveTokenToCookie } from './back-end-services-user';
 const BackendServices = {
   user: {},
   post: {},

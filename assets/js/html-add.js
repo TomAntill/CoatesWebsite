@@ -16,19 +16,14 @@ async function addImage(name, file, websiteName, uploadCategory, projectName) {
     const projectName = document.getElementById('projectName').value;
     try {
       await BackendServices.post.addImage(name, file, websiteName, uploadCategory, projectName);
-      // Optionally, you can show a success message or perform any other action upon successful API call.
     } catch (error) {
       console.error('Error:', error);
-      // Optionally, you can show an error message or perform any other action if there's an error.
-      // Store the failure message in localStorage
       localStorage.setItem("failureMessage", "Upload failed. Please check your credentials.");
 
-      // Display the failure message
       const messagebox = document.getElementById("messagebox");
       messagebox.innerText = "Upload failed.";
       messagebox.style.display = "block";
 
-      // Call the fadeMyDiv function after 3 seconds
       setTimeout(fadeMyDiv, 3000);
     }
 

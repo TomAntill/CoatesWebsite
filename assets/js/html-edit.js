@@ -14,9 +14,6 @@ async function populateDetails()
     const res = await BackendServices.get.getById(WEBSITE_NAME, BackendServices.helpers.getIdFromUrl());
 
     imageElement.src = res.url;
-    //imageNameElement.textContent = res.name;
-    //uploadCategoryElement.textContent = res.pictureCategory;
-    //projectNameElement.textContent = res.projectName;
 
     uploadCategoryElement.value = res.pictureCategory;
     projectNameElement.value = res.projectName;

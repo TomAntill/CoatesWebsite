@@ -35,44 +35,54 @@ export function updateMedia(websiteName, id, updatedData) {
     xhr.send(updatedDataJSON);
   }
 
-  export async function editImage(id, name, websiteName, uploadCategory, projectName) {
-    const token = BackendServicesHelpers.getCookieValue("token");
-    const url = BackendServicesHelpers.setAPIUrl("update");
+  export function editImage(id, name, websiteName, uploadCategory, projectName) {
+    console.log(id);
+    console.log(name);
+    console.log(websiteName);
+    console.log(uploadCategory);
+    console.log(projectName);
+
+    return new Promise((resolve, reject) => {
+      const token = BackendServicesHelpers.getCookieValue("token");
+      const url = BackendServicesHelpers.setAPIUrl("update");
   
-    const xhr = new XMLHttpRequest();
+      const headers = new Headers();
+      headers.append("Authorization", "Bearer " + token);
+      headers.append("Content-Type", "application/json"); 
   
-    // Set the URL and method
-    xhr.open("POST", url);
-  
-    // Set the callback function to handle the response
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        // Request was successful
-        console.log("Image updated successful!");
-      } else {
-        // Request failed
-        console.error("Image upload failed with status code " + xhr.status);
-      }
-    };
-  
-    // Set the Authorization header
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
-  
-    // Set the Content-Type header to indicate JSON data
-    xhr.setRequestHeader("Content-Type", "application/json");
-  
-    const jsonData = JSON.stringify({
-      id: id,
-      name: name,
-      websiteName: websiteName,
-      uploadCategory: uploadCategory,
-      projectName: projectName
+      const command = {
+        Id: id,
+        Name: name,
+        WebsiteName: websiteName,
+        PictureCategory: uploadCategory,
+        ProjectName: projectName
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(command)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+      })
+      .then(data => {
+        resolve(data);
+        window.location.href = 'http://127.0.0.1:8080/Images';
+      })
+      .catch(error => {
+        localStorage.setItem("failureMessage", "Update failed.");
+        console.error(error);
+        reject(error);
+      });
     });
-  
-    console.log("json", jsonData);
-  
-    xhr.send(jsonData);
   }
+  
+
   
   export async function addImage(name, file, websiteName, uploadCategory, projectName) {
     const token = BackendServicesHelpers.getCookieValue("token");
@@ -107,34 +117,3 @@ export function updateMedia(websiteName, id, updatedData) {
   
     xhr.send(formData);
   }
-  
-  export function sendAuthorizedPostRequest(url, data, callback) {
-    // Get the token from the cookie
-  
-    const token = BackendServicesHelpers.getCookieValue("token");
-  
-    const xhr = new XMLHttpRequest();
-  
-    // Set the Authorization header
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
-  
-    // Set the URL and method
-    xhr.open("POST", url);
-  
-    // Set the callback function to handle the response
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        // Request was successful
-        callback(null, xhr.responseText);
-      } else {
-        // Request failed
-        callback(new Error("Request failed with status code " + xhr.status));
-      }
-    };
-  
-    // Set the request payload
-    xhr.setRequestHeader("Content-Type", "application/json");
-    const requestData = JSON.stringify(data);
-    xhr.send(requestData);
-  }
-  

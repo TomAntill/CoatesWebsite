@@ -1,14 +1,3 @@
-export function toggleElementVisibility(elementId) {
-    var element = document.getElementById(elementId);
-    if (element) {
-      if (element.style.display === "none") {
-        element.style.display = "block"; // Show the element
-      } else {
-        element.style.display = "none"; // Hide the element
-      }
-    }
-  }
-
   export function setAPIUrl(action) {
     let baseUrl = "https://localhost:44311/api";
     let endpoint;
