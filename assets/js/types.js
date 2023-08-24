@@ -1,1 +1,0 @@
-const WEBSITE_NAME = "CoatesCarpentry";

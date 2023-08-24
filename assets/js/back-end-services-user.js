@@ -1,10 +1,9 @@
-import * as BackendServicesHelpers from './back-end-services-helpers.js';
-const WEBSITE_NAME = "CoatesCarpentry";
+import * as BackendServicesHelpers from "./back-end-services-helpers.js";
 
 export function jwtSignup(userName, password, websiteName) {
   return new Promise((resolve, reject) => {
     var url = BackendServicesHelpers.setAPIUrl("JwtSignup");
-    
+
     var finalUrl =
       url +
       "?username=" +
@@ -15,36 +14,33 @@ export function jwtSignup(userName, password, websiteName) {
       encodeURIComponent(websiteName);
 
     const headers = new Headers();
-    headers.append('SystemPassword', 'BigAndSwinging22!');
+    headers.append("SystemPassword", "BigAndSwinging22!");
 
-
-    
     fetch(finalUrl, {
-      method: 'POST',
+      method: "POST",
       headers: headers,
       //body: JSON.stringify(yourRequestBodyObjectHere) // Add your request body object
     })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-    })
-    .then(data => {
-      saveTokenToCookie(data.token);
-      window.location.href = 'http://127.0.0.1:8080/Login';
-      resolve(data);
-
-    })
-    .catch(error => {
-      localStorage.setItem(
-        "failureMessage",
-        "Signup failed. Please check your credentials."
-      );
-      console.error(error);
-      reject(error);
-    });
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+      })
+      .then((data) => {
+        saveTokenToCookie(data.token);
+        window.location.href = "http://127.0.0.1:8080/Login";
+        resolve(data);
+      })
+      .catch((error) => {
+        localStorage.setItem(
+          "failureMessage",
+          "Signup failed. Please check your credentials."
+        );
+        console.error(error);
+        reject(error);
+      });
   });
 }
 
@@ -106,49 +102,44 @@ export function logout() {
 }
 
 export function isLoggedIn() {
-  
-    var cookieValue = document.cookie;
-    const pageContentDiv = document.getElementById('pageContent');
-    const pageLoadingDiv = document.getElementById('loadingContent');
+  var cookieValue = document.cookie;
+  const pageContentDiv = document.getElementById("pageContent");
+  const pageLoadingDiv = document.getElementById("loadingContent");
 
-    if (cookieValue.length === 0){
-      console.log("No token.");
+  if (cookieValue.length === 0) {
+    console.log("No token.");
+    localStorage.removeItem("isLoggedIn");
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    window.location.href = "http://127.0.0.1:8080/Login";
+  } else {
+    const jwtParts = cookieValue.split(".");
+    const encodedPayload = jwtParts[1];
+    const decodedPayload = atob(encodedPayload); // Decoding base64
+
+    const payloadObject = JSON.parse(decodedPayload);
+
+    //const expDate = new Date(payloadObject.exp * 1000);
+    //console.log("exp Date:", expDate);
+
+    const currentTimestamp = Math.floor(Date.now() / 1000); // Get current timestamp in seconds
+
+    if (currentTimestamp < payloadObject.exp) {
+      console.log("Token is still valid.");
+      pageContentDiv.style.display = "block"; // Show the content
+      pageLoadingDiv.style.display = "none"; // Hide the content
+    } else {
+      console.log("Token has expired.");
       localStorage.removeItem("isLoggedIn");
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
       window.location.href = "http://127.0.0.1:8080/Login";
     }
-    else
-    {
-      const jwtParts = cookieValue.split('.');
-      const encodedPayload = jwtParts[1];
-      const decodedPayload = atob(encodedPayload); // Decoding base64
+  }
+}
 
-      const payloadObject = JSON.parse(decodedPayload);
-
-      //const expDate = new Date(payloadObject.exp * 1000);
-      //console.log("exp Date:", expDate);
-
-      const currentTimestamp = Math.floor(Date.now() / 1000); // Get current timestamp in seconds
-
-      if (currentTimestamp < payloadObject.exp) {
-        console.log("Token is still valid.");
-        pageContentDiv.style.display = 'block'; // Show the content
-        pageLoadingDiv.style.display = 'none'; // Hide the content
-        
-      } else {
-        console.log("Token has expired.");
-        localStorage.removeItem("isLoggedIn");
-        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        window.location.href = "http://127.0.0.1:8080/Login";
-      }
-    }
-  } 
-
-
-
-  export function saveTokenToCookie(token) {
+export function saveTokenToCookie(token) {
   // Define the cookie name
   const cookieName = "token";
 
@@ -163,7 +154,7 @@ export function isLoggedIn() {
   // Format the cookie string without "Bearer" prefix
   const cookieValue =
     tokenValue + "; expires=" + expiryDate.toUTCString() + "; path=/";
-    console.log("token value", cookieValue);
+  console.log("token value", cookieValue);
 
   // Set the cookie
   document.cookie = cookieName + "=" + cookieValue;

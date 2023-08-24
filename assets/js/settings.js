@@ -1,0 +1,5 @@
+const WEBSITE_SETTINGS = {
+  WEBSITE_NAME: "CoatesCarpentry",
+  WEBSITE_ID: 0,
+  UNSET_WEBSITE_ID: 99,
+};
