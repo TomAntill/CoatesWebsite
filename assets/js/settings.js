@@ -6,12 +6,16 @@ const WEBSITE_SETTINGS = {
   BACKEND_SERVICES_JS_PATH: "assets/js/websites/services/modules/",
 };
 
-function postLoadScript(file, isModule) {
+function postLoadScript(file, isModule, appendToHead) {
   const scriptElement = document.createElement("script");
   scriptElement.src = `${WEBSITE_SETTINGS.BACKEND_SERVICES_BASE_PATH}${WEBSITE_SETTINGS.BACKEND_SERVICES_JS_PATH}${file}`;
   console.log("bb1", scriptElement.src);
   if (isModule) {
     scriptElement.type = "module";
   }
-  document.body.appendChild(scriptElement);
+  if (appendToHead) {
+    document.head.appendChild(scriptElement);
+  } else {
+    document.body.appendChild(scriptElement);
+  }
 }
