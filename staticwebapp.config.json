@@ -1,0 +1,54 @@
+{
+    "trailingSlash": "never",
+    "platform": {
+      "apiRuntime": "node:18"
+    },
+    "routes": [
+      {
+        "route": "/",
+        "rewrite": "/Index.html"
+      },     
+      {
+        "route": "/Index",
+        "rewrite": "/Index.html"
+      },
+      {
+        "route": "/Add",
+        "rewrite": "/Add.html"
+      },     
+      {
+        "route": "/Delete",
+        "rewrite": "/Delete.html"
+      },      
+      {
+        "route": "/Details",
+        "rewrite": "/Details.html"
+      },
+      {
+        "route": "/Edit",
+        "rewrite": "/Edit.html"
+      },
+      {
+        "route": "/Images",
+        "rewrite": "/Images.html"
+      },
+      {
+        "route": "/Login",
+        "rewrite": "/Login.html"
+      },
+      {
+        "route": "/Signup",
+        "rewrite": "/Signup.html"
+      }
+    ],
+    "navigationFallback": {
+      "rewrite": "Index.html",
+      "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
+    },
+    "responseOverrides": {
+      "404": {
+        "rewrite": "/Index.html"
+      }
+    }
+  }
+  
