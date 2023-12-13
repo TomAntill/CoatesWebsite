@@ -1,7 +1,7 @@
 const WEBSITE_SETTINGS = {
   WEBSITE_NAME: "CoatesCarpentry",
-  WEBSITE_ID: 0,
-  UNSET_WEBSITE_ID: 99,
+  WEBSITE_ID: "CoatesCarpentry",
+  UNSET_WEBSITE_ID: "Unset",
   BACKEND_SERVICES_BASE_PATH:
     "https://tomantillwebdevservices.azurewebsites.net/",
   BACKEND_SERVICES_JS_PATH: "assets/js/websites/",

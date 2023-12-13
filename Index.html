@@ -444,14 +444,14 @@
       anchorId: "gallery",
       filters: galleryFilters,
       title: "Gallery",
-      getImagesUrl: `${WEBSITE_SETTINGS.BACKEND_SERVICES_BASE_PATH}api/services/GetAll`,
+      getImagesUrl: `${WEBSITE_SETTINGS.BACKEND_SERVICES_BASE_PATH}api/services/GetAll?appName=${WEBSITE_SETTINGS.WEBSITE_ID}`,
       defaultFilter: "*",
     });
     dynamicGallery.init({
       anchorId: "projects",
       filters: projectFilters,
       title: "Renovations",
-      getImagesUrl: `${WEBSITE_SETTINGS.BACKEND_SERVICES_BASE_PATH}api/services/GetAllProjects`,
+      getImagesUrl: `${WEBSITE_SETTINGS.BACKEND_SERVICES_BASE_PATH}api/services/GetAllProjects?appName=${WEBSITE_SETTINGS.WEBSITE_ID}`,
       defaultFilter: ".filter-Summerhouse",
     });
   }

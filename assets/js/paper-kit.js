@@ -26,7 +26,7 @@ var navbar_initialized,
   backgroundOrange = false,
   toggle_initialized = false;
 
-$(document).ready(function() {
+$(document).ready(function () {
   window_width = $(window).width();
   var big_image;
 
@@ -59,13 +59,13 @@ $(document).ready(function() {
     $(window).on('scroll', pk.checkScrollForTransparentNavbar);
   }
 
-  $('.navbar-collapse').click(function() {
-    setTimeout(function() {
+  $('.navbar-collapse').click(function () {
+    setTimeout(function () {
       if (pk.misc.navbar_menu_visible == 1) {
         $('html').removeClass('nav-open');
         pk.misc.navbar_menu_visible = 0;
         $('#bodyClick').remove();
-        setTimeout(function() {
+        setTimeout(function () {
           $toggle.removeClass('toggled');
         }, 550);
       }
@@ -73,17 +73,17 @@ $(document).ready(function() {
   });
 
   // Change the collor of navbar collapse
-  $('#navbarToggler').on('show.bs.collapse', function() {
+  $('#navbarToggler').on('show.bs.collapse', function () {
     if ($('nav').hasClass('navbar-transparent') && $(document).scrollTop() < 50) {
       $('.navbar').addClass('no-transition');
-        $('nav').removeClass('navbar-transparent');
-        $('.img-overridable-bg').removeClass('dark-color');
+      $('nav').removeClass('navbar-transparent');
+      $('.img-overridable-bg').removeClass('dark-color');
     }
-  }).on('hidden.bs.collapse', function() {
+  }).on('hidden.bs.collapse', function () {
     if ($(document).scrollTop() < 50) {
       $('.navbar').removeClass('no-transition');
-        $('nav:first-of-type').addClass('navbar-transparent');
-        $('.img-overridable-bg').addClass('dark-color');
+      $('nav:first-of-type').addClass('navbar-transparent');
+      $('.img-overridable-bg').addClass('dark-color');
     }
   });
 
@@ -97,9 +97,9 @@ $(document).ready(function() {
     $(window).on('scroll', pk.checkScroll)
   }
 
-  $('.form-control').on("focus", function() {
+  $('.form-control').on("focus", function () {
     $(this).parent('.input-group').addClass("input-group-focus");
-  }).on("blur", function() {
+  }).on("blur", function () {
     $(this).parent(".input-group").removeClass("input-group-focus");
   });
 
@@ -118,25 +118,25 @@ $(document).ready(function() {
 
 });
 
-$(document).on('click', '.navbar-toggler', function() {
+$(document).on('click', '.navbar-toggler', function () {
   $toggle = $(this);
 
   if (pk.misc.navbar_menu_visible == 1) {
     $('html').removeClass('nav-open');
     pk.misc.navbar_menu_visible = 0;
     $('#bodyClick').remove();
-    setTimeout(function() {
+    setTimeout(function () {
       $toggle.removeClass('toggled');
     }, 550);
   } else {
-    setTimeout(function() {
+    setTimeout(function () {
       $toggle.addClass('toggled');
     }, 580);
     div = '<div id="bodyClick"></div>';
-    $(div).appendTo('body').click(function() {
+    $(div).appendTo('body').click(function () {
       $('html').removeClass('nav-open');
       pk.misc.navbar_menu_visible = 0;
-      setTimeout(function() {
+      setTimeout(function () {
         $toggle.removeClass('toggled');
         $('#bodyClick').remove();
       }, 550);
@@ -152,7 +152,7 @@ pk = {
     navbar_menu_visible: 0
   },
 
-  checkScrollForTransparentNavbar: debounce(function() {
+  checkScrollForTransparentNavbar: debounce(function () {
     if ($(document).scrollTop() > $(".navbar").attr("color-on-scroll")) {
       if (transparent) {
         transparent = false;
@@ -166,7 +166,7 @@ pk = {
     }
   }, 17),
 
-  initNavbarImage: function() {
+  initNavbarImage: function () {
     var $navbar = $('.navbar').find('.navbar-translate').siblings('.navbar-collapse');
     var background_image = $navbar.data('nav-image');
 
@@ -185,25 +185,25 @@ pk = {
     }
   },
 
-  initPopovers: function() {
+  initPopovers: function () {
     if ($('[data-toggle="popover"]').length != 0) {
       $('body').append('<div class="popover-filter"></div>');
 
       //    Activate Popovers
-      $('[data-toggle="popover"]').popover().on('show.bs.popover', function() {
-        $('.popover-filter').click(function() {
+      $('[data-toggle="popover"]').popover().on('show.bs.popover', function () {
+        $('.popover-filter').click(function () {
           $(this).removeClass('in');
           $('[data-toggle="popover"]').popover('hide');
         });
         $('.popover-filter').addClass('in');
-      }).on('hide.bs.popover', function() {
+      }).on('hide.bs.popover', function () {
         $('.popover-filter').removeClass('in');
       });
 
     }
   },
 
-  initSliders: function() {
+  initSliders: function () {
     // Sliders for demo purpose in refine cards section
     if ($('#sliderRegular').length != 0) {
       var rangeSlider = document.getElementById('sliderRegular');
@@ -232,7 +232,7 @@ pk = {
 
   // Javascript for the parallax
 
-  checkScroll: debounce(function() {
+  checkScroll: debounce(function () {
     big_image = $('.page-header[data-parallax="true"]');
     oVal = ($(window).scrollTop() / 3);
     big_image.css({
@@ -245,8 +245,8 @@ pk = {
 }
 
 demo = {
-  initPickColor: function() {
-    $('.pick-class-label').click(function() {
+  initPickColor: function () {
+    $('.pick-class-label').click(function () {
       var new_class = $(this).attr('new-class');
       var old_class = $('#display-buttons').attr('data-class');
       var display_div = $('#display-buttons');
@@ -267,11 +267,11 @@ demo = {
 
 function debounce(func, wait, immediate) {
   var timeout;
-  return function() {
+  return function () {
     var context = this,
       args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     }, wait);
@@ -307,14 +307,16 @@ function hasScrolled() {
 
 function debounce(func, wait, immediate) {
   var timeout;
-  return function() {
+  return function () {
     var context = this,
       args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     }, wait);
     if (immediate && !timeout) func.apply(context, args);
   };
 };
+
+
